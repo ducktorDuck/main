@@ -1,0 +1,13 @@
+#!/bin/zsh
+
+## Main function set
+# Class --Autosource
+
+function \
+iw-connect() {
+   source $func/spin
+   spin-ball
+   rfkill unblock wifi
+   iwctl station wlan0 connect Aj1982
+   spin-triangle
+}

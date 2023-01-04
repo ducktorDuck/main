@@ -1,0 +1,72 @@
+#!/bin/zsh
+
+## Main function set
+# Class --Autosource
+
+spin-p() {
+   reset
+   spinner --style 'triangle' start 'Setting up locale, hwclock, and setting local time'
+   sleep 3
+   spinner stop
+}
+spin-pp() {
+   reset
+   spinner --style 'bouncingBall' start 'Generating files'
+   sleep 3
+   spinner stop
+}
+
+function \
+provision() {
+   foreach i in /main/source-docs/*; do
+		source $i
+			if [[ $sodo = /main/source-docs ]]; then
+            source $alias
+         fi
+	done
+
+
+	
+	cp /master/.private/sudoers /etc/sudoers
+	cp /master/.etc/pacman.conf /etc/pacman.conf
+	cp /master/.etc/mirrorlist /etc/pacman.d/mirrorlist
+	cp /master/.etc/main.conf /etc/bluetooth/main.conf
+   cp /home/bin/spinner /usr/bin/spinner
+   cp /home/bin/spinner /usr/bin/revolver
+
+   print "ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime"
+   ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+   print "echo LANG=en_US.UTF-8 > /etc/locale.conf"
+   echo "LANG=en_US.UTF-8" > /etc/locale.conf
+
+   print "echo en_US.UTF-8 UTF-8 >> /etc/locale.gen"
+   echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+
+   locale-gen
+
+   hwclock --systohc
+
+   spinner --style 'bouncingball' start 'Locale and Time set Successfully'
+   sleep 3
+   spinner stop
+
+   echo "Set up grub as bootloader? :$grub_boot"
+   read grub_boot
+
+   case $grub_boot in
+   y || Y|| yes || YES )
+      echo "What disk is EFI? :$efi_disk";
+      read efi_disk;
+
+      grub-install $efi_disk;
+      grub-mkconfig -o /boot/grub/grub.cfg || echo "Error $?";
+      ;;
+   n || N || no || NO )
+      return 0
+      ;;
+   *)
+      echo "Invalid option"; return 69
+      ;;
+   esac
+
+}

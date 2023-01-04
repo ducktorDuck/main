@@ -1,0 +1,2 @@
+qt6-base qt5-base qt6-wayland qt6-base plasma plasma-desktop plasma-sdk plasma-wayland-protocols plasma-wayland-session xorg-xwayland rust ruby go clang ruby bash-completion zsh-completions fish jupyter-notebook jupyter-server python-qtconsole jupyter_console python-jupyterlab_server jupyterlab jupyterlab-widgets bash-language-server typescript typescript-language-server python-lsp-server qt6-languageserver git nodejs yarn npm electron gtk4 yt-dlp libreoffice-fresh firefox inkscape gimp code vokoscreen yad zenity dialog kdialog spectacle firefox opera rclone calc ufw
+  

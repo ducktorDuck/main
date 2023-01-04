@@ -1,0 +1,59 @@
+#!/usr/bin/env/ zsh
+
+function \
+mina() {
+	for files in /main/source-docs/*; do
+		source $files
+		source $sodo/.alias
+	done
+	export thing=''
+
+		if [[ $thing = '' ]]; then
+			unset thing && export thing=''
+		elif [[ $thing != '' ]]; then
+			export thing=''
+		else
+			unset thing
+		fi
+
+			thing=$(zenity --entry \
+						   --text="Mina does What? (HINT: Input parameter into text box)" \
+					       --title="Mina Do for You"
+			)
+
+	 {
+
+		function 'mina says'() {
+
+
+			case $(cmmd) in
+				'--mina says make')
+					echo "Make what? :$that"; wait
+				;;
+
+				*)
+					for says in "$thing"; do
+						that="$says"
+					done
+
+				;;
+
+			esac
+
+		}
+
+
+	for opts in $thing; do
+		echo "Opts:$opts , Call:$thing , Obj:$that"
+	done
+
+	}
+
+	${thing}
+
+}
+
+
+	'
+
+

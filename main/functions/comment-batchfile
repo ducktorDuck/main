@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+comment-batchfile() {
+	source /main/source-docs/all
+	setopt extendedglob
+
+
+	sed -i 's/^/#/' $batchdoc
+
+}
+
+alias un-all='$(comment-batchfile)'

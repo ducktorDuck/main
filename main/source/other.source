@@ -1,0 +1,9 @@
+# Plugins and theme sorcery global
+
+for a in /main/source-docs/prompt-export; do
+	source $a
+	list=( $theme $syntax $substring )
+	foreach b in ${list}; do
+		source $b
+	done
+done

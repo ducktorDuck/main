@@ -1,0 +1,41 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+
+take() {
+	setopt extendedglob
+
+	local default_export=(
+	 'm=/main' \
+	 'sodo=/main/source-docs' \
+	 'all=/main/source-docs/all' \
+	 'expo_all=/main/source-docs/prompt-export' \
+	); \
+	export ${default_export}
+
+	local default_source=(
+	 '/main/source-docs/prompt-export' \
+	 '/main/source-docs/all' \
+	); \
+	source ${default_source}
+
+
+
+#--------------------------------------------------------------------------------------------------------
+	selected_directory=$(zenity --entry --title="Directory Change Request" --text="Directory or File to Take")
+
+	sudo chown -R "$USER":"$USER" "$selected_directory" \
+	; has-error
+
+	sudo chmod -R u+w,u+x "$selected_directory" \
+	; has-error
+
+	unset selected_directory
+
+}
+

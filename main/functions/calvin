@@ -1,0 +1,352 @@
+#!/bin/zsh
+
+## Main function set
+# Class --Autosource
+
+
+mainmenu() {
+   echo -ne "
+   MAIN MENU
+   1) CMD1
+   0) Exit
+   Choose an option:  "
+    read -r ans
+    case $ans in
+    1)
+        submenu
+        mainmenu
+        ;;
+    0)
+        echo "Bye bye."
+        exit 0
+        ;;
+    *)
+        echo "Wrong option."
+        exit 1
+        ;;
+    esac
+
+}
+
+submenu() {
+   echo -ne "
+   SUBMENU
+   1) SUBCMD1
+   2) Go Back to Main Menu
+   0) Exit
+   Choose an option:  "
+    read -r ans
+    case $ans in
+    1)
+        sub-submenu
+        submenu
+        ;;
+    2)
+        menu
+        ;;
+    0)
+        echo "Bye bye."
+        exit 0
+        ;;
+    *)
+        echo "Wrong option."
+        exit 1
+        ;;
+    esac
+
+}
+
+sub-submenu() {
+   echo -ne "
+   SUB-SUBMENU
+   1) GOOD MORNING
+   2) GOOD AFTERNOON
+   3) Go Back to SUBMENU
+   4) Go Back to MAIN MENU
+   0) Exit
+   Choose an option:  "
+    read -r ans
+    case $ans in
+    1)
+        fn_goodmorning
+        sub-submenu
+        ;;
+    2)
+        fn_goodafternoon
+        sub-submenu
+        ;;
+    3)
+        submenu
+        ;;
+    4)
+        mainmenu
+        ;;
+    0)
+        echo "Bye bye."
+        exit 0
+        ;;
+    *)
+        echo "Wrong option."
+        exit 1
+        ;;
+    esac
+}
+
+init-var(){
+
+   count=0
+   read -p "Enter number: " number
+
+   for (( i=1;i<=$number;i++ ))
+   do
+      for ((j=1;j<=i;j++))
+      do
+
+         if [ `expr $i % $j` -eq 0 ]
+         then
+
+            if [ `expr $i / $j` -eq `expr $j + 1` ]
+            then
+               count=`expr $count + 1`;
+               if [ $i  -eq $number ]
+               then
+                  let K=$j+1
+                  let tot=$count*$K
+                  echo "$tot →→ $j X $K"
+               fi
+            fi
+         fi
+      done
+   done
+
+   echo "The total numbers are: "$count
+
+}
+
+
+function \
+assignment() {
+   reset
+   source $func/spin
+   spin6
+   echo "This better be good.."
+   select Method in "Self-learn" "Self-decide" "Pass-parameters"; do
+      if [ -n "$Method" ]; then
+         break
+         echo "illegal choice; try again (Ctr-C to exit)"
+      fi
+      case $Method in
+      1)
+         init-var; mainmenu
+         ;;
+      2)
+         init-var; sub-menu
+         ;;
+      3)
+         init-var; mainmenu && submenu && sub-submenu
+         ;;
+     *)
+         ;;
+   esac
+   done
+   echo "$Method Selected."
+
+   spinner --style 'circle' start 'Generating new database'
+   sleep 3
+   spinner stop
+
+   spinner --style 'dots12' start 'Building usable functions & defining'
+   sleep 3
+   spinner stop
+
+   spinner --style 'shark' start 'Writing code base, generating self-init'
+   sleep 3
+   spinner stop
+
+   yes | pacman -S yarn
+
+   cd
+   reset
+   yarn create electron-app The-Magic-Trahcan
+   cd /home/The-Magic-Trahcan/node_modules
+
+   spinner --style 'line' start 'Generating node modules for internal and external use'
+   sleep 3
+   spinner stop
+   cd node_modules
+   spin13
+   reset
+   spinner --style 'arc' start 'Upgrading'
+   sleep 3
+   spinner stop
+
+   spin-ball
+   spin-triangle
+   spinner --style 'line' start 'Installing newly generating scripts, functions, code base, and callable commands'
+   sleep 3
+   spinner stop
+   reset
+   yarn add uglify shelljs
+   cd $HOME/The-Magic-Trashcan/node_modules/uglify-js/lib
+   print "
+
+   DONE"
+   echo "
+
+   $fg_bold[blue]Care to review the code?  There is ALOT of it.  Roughly 139,000 lines of code generated at :$care{$reset_color}
+
+   "
+   read care
+   time
+
+   date
+
+   case $care in
+   y)
+      cd $HOME/The-Magic-Trashcan/node_modules/uglify-js/lib/;
+      echo "$PWD"
+      ;;
+   *)
+      ;;
+   esac
+
+}
+
+function \
+calvin() {
+    assigned=$(zenity --entry --text='What is my assignment?')
+
+    echo "Ok, I will $assigned"
+
+    if [[ $assigned = "make an app" ]] || \
+    [[ $assigned = "Make an app" ]] || \
+    [[ $assigned = "make an application" ]] || \
+    [[ $assigned = "Make an application" ]]; then
+        name_of_new_app=$(zenity --entry --text='Name of New Application?')
+    else
+        zenity --text-info
+
+    fi
+
+    (
+        cd ~/ || cd $HOME
+        yarn create electron-app --template=webpack-typescript "$name_of_new_app"
+        export job_is="$assigned"; export assigned=''
+        cd "$HOME"/"$name_of_new_app"/node_modules || echo "node not found. Not that I node-iced anyway..."
+        yarn upgrade
+        echo $? && export err="$?"
+        for stuff in $err; do
+            if [[ $? -gt 0 ]]; then
+                echo "Error:$?"
+
+                if [[ $PWD = "$HOME/$name_of_new_app/node_modules" ]]; then
+                    yard add uglify
+                else
+                    cd $HOME/$name_of_new_app/node_modules; yarn add uglify
+                fi
+            fi
+            break
+        done
+        active_app="$name_od_new_app"; export $name_of_new_app=''
+
+        cd $HOME; \
+            chapp="$HOME"/"$active_app"
+            sudo chown -R me:me /main
+            sudo chown -R me:me /home
+            sudo chmod -R a+w,a+x /home
+            sudo chmod -R a+w,a+x /main
+            \
+            export default_web_app="/main/web/Default_WebApp/top"
+        sudo cp -r "$default_web_app" "$chapp"/src || sudo cp -r "$default_web_app" "$HOME"/"$active_app"/src
+        cd "$chapp"; yarn start "$chapp" || cd $HOME && yarn start "$active_app"
+    ) |
+    zenity --text-info \
+           --title="Generating Request" \
+           --text="Creating App and New website" \
+           --cancel-label="Go Fuck Youself" \
+           --ok-label="We Good, We Good.." \
+           --auto-scroll
+
+           (
+           cd "$chapp" || cd $HOME/$active_app
+           yarn upgrade
+           cd $chapp
+
+           yarn add @electron-forge --dev
+
+           yarn add electron-prebuilt-compile --dev
+
+	   cp $HOME/$active_app \
+
+	   	if [[ $? -gt 0 ]]; then
+		  
+		   echo "Error:$?"
+       	          
+		  else
+		  
+		   echo ''
+		
+		  	 for previous in "$Error"; do
+		     	    previous="$?" \
+		            if [[ $previous ! = 0 ]]; then
+			       return 69
+			       break
+			    fi
+ 		
+		         done
+
+		 fi
+
+
+           ) |
+	   dialog --menu --height="400" --width="280" --title="Menu"
+
+
+ progress() {
+      (
+       
+	{
+	   (
+
+      )
+ 
+  )}
+ }
+
+
+
+    echo "10"
+    echo "# Initialting" ; sleep 2
+    echo "25"
+    echo "# Running First Tasks..." ; sleep 2
+    echo "40"
+    echo "# Checking Integrity..." ; sleep 2
+    echo "50"
+    echo "# Running Follow-up Tasks.." ; sleep 2
+    echo "65"
+    echo "# Compiling and Generating Files..." ; sleep 2
+    echo "75"
+    echo "# Validating Newely Made Filesystem..." ; sleep 2
+    echo "90"
+    echo "# Almost Finished..." ; sleep 2
+    echo "99"
+    echo "# Checking Everything Out..." ; sleep 2
+    echo "# Done" ; sleep 2
+    echo "100"
+    ) |
+    zenity --progress \
+    --title="Working on $assigned" \
+    --text="Initializing.." \
+    --percentage=0 \
+    --auto-close \
+    --auto-kill
+
+    (( $? !=0 )) && zenity --error -- text="Error in Zenity Command"
+
+    exit 0
+
+ }
+
+
+
+

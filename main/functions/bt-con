@@ -1,0 +1,17 @@
+#!/bin/zsh
+
+## Main function set
+# Class --Autosource
+
+function \
+bt-con() {
+   source /main/source-docs/all || source /mnt/source-docs/all
+   spin-ball
+   rfkill unblock bluetooth
+   bluetoothctl power on
+   bluetoothctl discoverable on
+   bluetoothctl pairable on
+   bluetoothctl connect $btkb
+   spin-triangle
+   spin13
+}

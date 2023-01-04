@@ -1,0 +1,35 @@
+#!/bin/zsh
+
+## Main function set
+# Class --Autosource
+
+function \
+get-paru() {
+   if [ -d "$HOME/rust" ] || [ -d "$HOME/rustup" ]; then
+      cd
+
+      git clone https://aur.archlinux.org/paru
+      cd $PWD/paru
+
+      if [[ $PWD = "$HOME/paru" ]]; then
+         mine $PWD
+         makepkg -si
+
+      fi
+
+   elif [ ! -d "$HOME/rust" ] || [ ! -d "$HOME/rustup" ]; then
+      yes | sudo pacman -S rust
+      cd
+
+      git clone https://aur.archlinux.org/paru
+      cd $PWD/paru
+
+      if [[ $PWD = "$HOME/paru" ]]; then
+         mine $PWD
+         makepkg -si
+
+      fi
+   fi
+
+
+}

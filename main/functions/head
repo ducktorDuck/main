@@ -1,0 +1,29 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+
+head() {
+	setopt extendedglob
+
+	for files in /main/source-docs/*; do
+        source $files
+
+			if [ ! -e /main/source-docs/alias ]; then
+				echo "alias file isnt avl."
+
+			else
+				for src_alias in /main/source-docs/alias; do
+					source $src_alias
+
+				done
+
+			fi
+
+    done
+}
+

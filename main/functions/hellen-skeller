@@ -1,0 +1,395 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+function rebuild-dirs() {
+	foreach fu in /main/source-docs/*; do
+		source $fu
+			if [[ $alias = /main/source-docs/.alias ]]; then
+				source $alias
+			fi
+	done
+   if [ -d "/main" ]; then
+		mine /main/*
+	fi
+
+	if [ -d "/master" ]; then
+		mine /master/*
+   fi
+
+   if [ -d "/mnt" ]; then
+		sudo rm -r /mnt/*
+	fi
+	mine /mnt
+
+	if [ -d "/mnt/master" ]; then
+		sudo rm -r /mnt/master
+	fi
+	if [ ! -e "/mnt/master" ]; then
+		sudo mkdi /mnt/master
+	fi
+
+	export mm="/mnt/master"
+	sudo mkdir $mm
+	sudo mkdir $mm/.usr-share
+	sudo mkdir $mm/.etc
+	sudo mkdir $mm/.var
+	sudo mkdir $mm/.home
+	sudo mkdir $mm/.main
+	sudo mkdir $mm/.plugins
+
+}
+
+function import-home-skel() {
+foreach fu in /main/source-docs/*; do
+		source $fu
+			if [[ $alias = /main/source-docs/.alias ]]; then
+				source $alias
+			fi
+	done
+	local home_skel=(
+		$HOME/.alias
+		$HOME/.zshrc
+		$HOME/.config
+		$HOME/.local
+		$HOME/.zsh_history
+		$HOME/bin
+		$HOME/.oh-my-zsh
+		$HOME/.fonts.conf
+		$HOME/iso
+		$HOME/default_webapp
+		$HOME/Documents
+		$HOME/Downloads
+		$HOME/Music
+		$HOME/onedrive
+		$HOME/Pictures
+		$HOME/unzipped
+		$HOME/zip
+		$HOME/yt
+		$HOME/Videos
+		$HOME/duel.mlt
+		$HOME/LightlyShaders
+		$HOME/.gnupg
+		$HOME/.gtkrc-2.0
+
+	)
+
+	sudo cp -r ${home_skel} /mnt/master/.home
+
+}
+
+function import-main-skel() {
+foreach fu in /main/source-docs/*; do
+		source $fu
+			if [[ $alias = /main/source-docs/.alias ]]; then
+				source $alias
+			fi
+	done
+	local main_skel=(
+		/main/functions
+		/main/scripts
+		/main/installers
+		/main/source-docs
+	)
+
+	sudo cp -r ${main_skel} /mnt/master/.main
+
+}
+
+function appimport() {
+foreach fu in /main/source-docs/*; do
+		source $fu
+			if [[ $alias = /main/source-docs/.alias ]]; then
+				source $alias
+			fi
+	done
+	local app_import=(
+		/usr/share/applications
+	)
+
+	sudo cp -r ${app_import} /mnt/master/.usr-share
+
+}
+
+function zpluged() {
+foreach fu in /main/source-docs/*; do
+		source $fu
+			if [[ $alias = /main/source-docs/.alias ]]; then
+				source $alias
+			fi
+	done
+	local zsh_plugs=(
+		/usr/share/zsh/plugins
+	)
+
+	cp -r ${zsh_plugs} /mnt/master/.plugins
+
+}
+
+function etc-import() {
+foreach fu in /main/source-docs/*; do
+		source $fu
+			if [[ $alias = /main/source-docs/.alias ]]; then
+				source $alias
+			fi
+	done
+	local etc_import=(
+		/etc/pacman.conf
+		/etc/pacman.d/mirrorlist
+		/etc/bluetooth/main.conf
+		/etc/default/grub
+	)
+
+	sudo cp -r ${etc_import} /mnt/master/.etc
+
+}
+
+own-import-dirs() {
+foreach fu in /main/source-docs/*; do
+		source $fu
+			if [[ $alias = /main/source-docs/.alias ]]; then
+				source $alias
+			fi
+	done
+	sudo chown -R me:me /mnt/*
+	sudo chmod -R 777 /mnt/*
+	sudo chmod -R +x /main/*
+
+}
+
+
+function import-root-owned-skel() {
+foreach fu in /main/source-docs/*; do
+		source $fu
+			if [[ $alias = /main/source-docs/.alias ]]; then
+				source $alias
+			fi
+	done
+	local corbopkg=(
+		/var/lib/pacman
+
+	)
+
+	local var_import=(
+		${corbopkg}
+		/var/lib/systemd/rfkill
+		/var/lib/dhcpcd
+		/var/lib/iwd
+
+	)
+
+	local root_owned_skel=(
+		/etc/sudoers
+		${var_import}
+		${corbopkg}
+
+	)
+
+	if [ ! -d "/archive" ]; then
+		sudo -i mkdir /archive
+	fi
+	if [ ! -d "/mnt/master/.private" ]; then
+		sudo -i mkdir /mnt/master/.private
+	fi
+
+	sudo -i cp -r --preserve ${root_owned_skel} /mnt/master/.private
+
+}
+
+make-archive-backup() {
+foreach fu in /main/source-docs/*; do
+		source $fu
+			if [[ $alias = /main/source-docs/.alias ]]; then
+				source $alias
+			fi
+	done
+	if [ -d "/archive" ]; then
+		chmod-764 /archive
+	fi
+
+	cd /archive
+
+	sudo -i tar --preserve-permissions --same-owner --ignore-command-error --overwrite  --gzip -vcf /archive/arc.tar  /mnt/master
+
+}
+
+moms-box() {
+	foreach fu in /main/source-docs/*; do
+		source $fu
+			if [[ $alias = /main/source-docs/.alias ]]; then
+				source $alias
+			fi
+	done
+
+}
+
+
+format-new-install() {
+foreach fu in /main/source-docs/*; do
+		source $fu
+			if [[ $alias = /main/source-docs/.alias ]]; then
+				source $alias
+			fi
+	done
+	moms-box
+	if blkid | grep -q '/dev/sda: UUID="2f2c4c78-5c88-4450-a2cd-f51b868b5543" BLOCK_SIZE="4096" TYPE="ext4"'; then
+		echo ''
+	else
+		sudo wipefs -a /dev/sda; wait
+		sudo mkfs.ext4 /dev/sda; wait
+	fi
+
+
+}
+
+function do-install-prep() {
+	setopt extendedglob
+	foreach fu in /main/source-docs/*; do
+		source $fu
+			if [[ $alias = /main/source-docs/.alias ]]; then
+				source $alias
+			fi
+	done
+
+	if blkid | grep -q "/dev/sda"; then
+		echo ''
+	else
+		"No USB backup found. Insert one and try again"
+			exit 69 || return 69
+	fi
+
+		if lsblk | grep -q "/mnt"; then
+			echo ''
+		else
+			mount /dev/sda /mnt
+		fi
+	source "$$"
+	format-new-install
+
+	zenity --info --text="All and all, this should take roughly 8-15 minuets
+depending on speed and condition of the USB backup disk.  Allow as much as 30 minuets.
+Anything beyond that is potentially an issue.  Once it reaches 45 minuets, there is likel
+a problem*" &
+
+   spinner --style 'line' start 'Refreshing and building appropriate directories for tranafer'
+   sleep 3
+	rebuild-dirs
+	own-import-dirs
+	spinner stop
+
+	spinner --style 'line' start 'Process Loading..Working on it.'
+	sleep 3
+	own-import-dirs
+	spinner stop
+
+	spinner --style 'line' start 'Importing function skel'
+	sleep 3
+	import-main-skel
+	own-import-dirs
+	spinner stop
+
+	spinner --style 'line' start 'Importing var, etc, and applications skel'
+	sleep 3
+	etc-import
+	appimport
+	own-import-dirs
+	spinner stop
+
+	spinner --style 'line' start 'Importing zsh plugins'
+	sleep 3
+	zpluged
+	own-import-dirs
+	spinner stop
+
+	spinner --style 'line' start 'Importing home skel. THIS WILL TAKE SOME TIME!!!'
+	import-home-skel
+	own-import-dirs
+	spinner stop
+
+	spinner --style 'line' start 'Importing permission sensative files'
+	sleep 3
+	import-root-owned-skel
+	spnner stop
+
+	pkglist=$func/pkglist
+
+	foreach i in /main/source-docs/*; do
+		source $i
+			if [[ $sodo = /main/source-docs ]]; then
+            source $alias
+         fi
+	done
+
+
+		foreach l in \
+			$(
+				cat $pkglist
+			) ; do
+				yes |
+				pacstrap /mnt $l
+		done
+
+		cp -r /mnt/master/.main /mnt
+		mv /mnt/.main /mnt/main
+
+		arch-chroot /mnt
+
+}
+
+clean-cata-import() {
+foreach fu in /main/source-docs/*; do
+		source $fu
+			if [[ $alias = /main/source-docs/.alias ]]; then
+				source $alias
+			fi
+	done
+	cd /mnt/master || return 69 && exit 69
+
+	if [ -d "$mm/.home" ]; then
+		mine /mnt
+		mv bin .local .zshrc .config .alias .fonts.conf .frag .git iso .oh-my-zsh .zsh_history mycons /mnt/master/.home
+	else
+		mkdir /mnt/master/.home
+		mv bin .local .zshrc .config .alias .fonts.conf .frag .git iso .oh-my-zsh .zsh_history mycons /mnt/master/.home
+	fi
+
+	if [ -d "$mm/.etc" ]; then
+		mine /mnt
+		mv byobu main.conf mirrorlist pacman.conf sudoers /mnt/master/.etc
+	else
+		mkdir /mnt/master/.etc
+		mv byobu main.conf mirrorlist pacman.conf sudoers /mnt/master/.etc
+	fi
+
+	if [ -d "$mm/.main" ]; then
+		mine /mnt
+		mv ftemplates functions installers scripts oh-my-zsh.sh souorce-docs /mnt/master/.main
+	else
+		mkdir $mm/.main
+		mv ftemplates functions installers scripts oh-my-zsh.sh souorce-docs /mnt/master/.main
+	fi
+
+	if [ -d "$mm/.var" ]; then
+		mine /mnt
+		mv dhcpcd iwd pacman rfkill /mnt/master/.var
+	else
+		mkdir /mnt/master/.var
+		mine /mnt
+		mv dhcpcd iwd pacman rfkill /mnt/master./var
+	fi
+	if [ -d "$mm/.usr-share" ]; then
+		mv applications /mnt/master/usr-share
+
+		mine /mnt
+	else
+		mkdir /mnt/master/.usr-share
+		mv applications /mnt/master/usr-share
+		mine /mnt
+	fi
+
+}
+

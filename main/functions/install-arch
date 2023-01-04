@@ -1,0 +1,45 @@
+#!/usr/bin/env zsh
+
+## Main function set
+# Class --Autosource
+
+
+install-arch() {
+   foreach i in /main/source-docs/*; do
+		source $i
+			if [[ $sodo = /main/source-docs ]]; then
+            source $alias
+         fi
+   done
+
+   # Enable services
+
+   systemctl enable dhcpcd
+   systemctl enable iwd
+   systemctl enable sddm
+
+   rfkill unblock wifi
+   iwctl station wlan0 connect Aj1982 --passwd Hilton1653
+
+   rfkill unblock bluetooth
+   systemctl enable bluetooth
+
+   chown me:me /users
+   chown -R me:me /users/me
+   chown -R corbo:me /users/corbo
+   chown -R us:me /users/us
+   chown -R spare:me /users/spare
+   chown -R openbox:me /users/openbox
+
+   mkdir /.bk
+   mv /master /.bk
+   mkdir /main
+   cp -r /.bk/.main /main
+   chown -R me:me /main
+   chmod -R a+w,a+x /main
+   cp -r /.bk/.home /users/me
+   chown -R me:me /users/me
+
+   systemctl reboot
+
+}

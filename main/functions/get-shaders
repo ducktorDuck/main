@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+get-shaders() {
+	source /main/source-docs/all
+	setopt extendedglob
+   #setopt emulate -L zsh
+
+	spinner --style 'line' start 'Process Loading..Working on it'
+	sleep 3
+	cd $HOME
+	yes | pacd cmake rhash extra-cmake-modules jsoncpp qt5-xmlpatterns kinit kde-dev-utils
+
+	echo 5 | yay --useask --answerdiff none --answeredit no --answerclean yes LightlyShaders
+# https://github.com/Luwx/Lightly
+
+	spinner stop
+}

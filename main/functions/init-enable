@@ -1,0 +1,31 @@
+#!/usr/bin/env zsh
+
+## Main function set
+# Class --Autosource
+
+function \
+init-enable() {
+source $func/spin
+   spin-ball
+   print "enabling recources:"
+   systemctl enable iwd
+   systemctl enable dhcpcd
+   systemctl enable bluetooth
+
+   systemctl start dhcpcd
+   systemctl start iwd
+   systemctl start bluetooth
+   spin-ball
+   rfkill unblock wifi
+   iwctl station wlan0 connect Aj1982  \
+   || rfkill unblock wifi && station wlo1 connect Aj1982
+   spin13
+   pacman-key --init
+   pacman-key --populate
+
+   yes | pacman -Syyu
+   pacman -Fy
+   spin10
+   print "System recources enabled, network connected, pacman keyrings populated.."
+   spin7
+}

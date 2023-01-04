@@ -1,0 +1,17 @@
+#!/bin/zsh
+
+## Main function set
+# Class --Autosource
+
+enter() {
+   arch-chroot /mnt
+}
+
+function \
+bootstrap() {
+   source $func/spin
+   spin-ball
+   pacstrap /mnt base base-devel nano linux-firmware linux linux-headers linux-zen linux-zen-headers zsh zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search sof-firmware sof-tools alsa-firmware alsa-utils grub os-prober efibootmgr mkinitcpio initramfs fuse iwd iw dhcpcd arch-install-scripts bashtop htop bluez bluez-tools bluez-utils mesa reflector
+   spin13
+
+}

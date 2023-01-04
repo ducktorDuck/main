@@ -1,0 +1,42 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+function \
+get-zsh() {
+	source /main/source-docs/all
+	setopt extendedglob
+   #setopt emulate -L zsh
+
+	spinner --style 'line' start 'Process Loading..Working on it'
+	sleep 3
+
+	if [ ! -d "$HOME/.oh-my-zsh" ]; then
+
+		sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+	elif [ ! -d "*/.oh-my-zsh" ]; then
+
+		sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+	elif [ -d "*/.oh-my-zsh" ]; then
+		rm -r */.oh-m-zsh
+
+		sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+	elif [ -d "$HOME/.oh-my-zsh" ]; then
+		rm -r $HOME/.oh-m-zsh
+
+		sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+	else
+		echo "ZSH cannot be installed in the desired format"
+
+	fi
+	spinner stop
+}
+

@@ -1,0 +1,32 @@
+#!/usr/bin/env zsh
+
+## Main function set
+# Class --Autosource
+
+function \
+set-path() {
+   source /main/source-docs/function-autosource
+   main="/main"
+   func="$main/functions"
+   fbin="$func/bin"
+   ubin="$HOME/bin"
+   x="/usr"
+   xb="/usr/bin"
+   xsb="/usr/sbin"
+   xlo="/usr/local"
+   xs="/usr/share"
+   xl="/usr/lib"
+   va="/var"
+   safe_path="$xlo/sbin:$xlo/bin:$xb:$xsb"
+   perl_path="$xb/site_perl:$xb/vendor_perl:$xb/core_perl"
+   me_path="$HOME/bin:$HOME/.local/bin:$HOME/.config:$HOME/.local"
+   me_func_path="$fbin:$func"
+   more_path="$xl:$va"
+   root_path="/root/bin:/root/.local/bin:/root/.local:/root/.config"
+   unsafe_path="/bin:/sbin"
+   ruby_path="/home/.local/share/gem/ruby/3.0.0/bin"  
+
+   unset PATH
+   export PATH="$safe_path:$perl_path:$me_path:$me_func_path:$more_path:$root_path:$unsafe_path:$ruby_path"
+
+}

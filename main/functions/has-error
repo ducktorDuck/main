@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+
+has-error() {
+had_error=$?
+	if [[ "$had_error" != 0 ]]; then
+		echo Error:"$had_error"; return 0
+
+	else
+		echo "No errors to report"
+
+	fi
+
+	unset has_error
+
+}
+
+

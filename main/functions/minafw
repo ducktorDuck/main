@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+
+minafw() {
+	setopt extendedglob
+
+
+	foreach fu in /main/source-docs/*; do
+        source $fu
+				if [[ $alias = /main/source-docs/.alias ]]; then
+					source $alias
+				fi
+    done
+}
+

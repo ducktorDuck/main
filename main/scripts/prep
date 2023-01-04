@@ -1,0 +1,202 @@
+#!/bin/zsh
+
+## Main function set
+# Class --Autosource
+
+foreach fu in /main/source-docs/*; do
+   source $fu
+      if [[ $alias = /main/source-docs/.alias ]]; then
+         source $alias
+      fi
+done
+
+
+make-mnt-dirs() {
+
+   if [ ! -d "/mnt/root" ]; then
+
+      mkdir /mnt/root
+   fi
+
+   if [ ! -d "/mnt/master" ]; then
+
+      mkdir /mnt/master
+   fi
+
+   if [ ! -d "/mnt/boot" ]; then
+
+      mkdir /mnt/boot
+   fi
+
+   if [ ! -d "/mnt/boot/efi" ]; then
+
+      mkdir /mnt/boot/efi
+   fi
+
+   if [ ! -d "/mnt/home" ]; then
+
+      mkdir /mnt/home
+   fi
+
+}
+
+setup-dirs() {
+
+   if [ ! -d "/skel" ]; then
+      mkdir /skel
+   elif [ -d "/skel" ]; then
+
+      rm -rf /skel*
+
+      mkdir /skel
+   fi
+
+      if [ ! -d "/m_skel" ]; then
+         mkdir /m_skel
+      elif [ -d "/m_skel" ]; then
+
+         rm -rf /m_skel*
+
+         mkdir /m_skel
+      fi
+
+         if [ ! -d "/mnt" ]; then
+            mkdir /mnt
+         elif [ -d "/mnt" ]; then
+
+            rm -rf /mnt*
+
+            mkdir /mnt
+         fi
+
+      if [ -d "/mnt" ]; then
+         make-mnt-dirs
+      else
+         return "$?"
+      fi
+
+}
+
+setup-dirs-live() {
+   spin-line
+   if [ ! -d "/mnt" ]; then
+      mkdir /mnt
+   elif [ -d "/mnt" ]; then
+
+      rm -rf /mnt*
+
+      mkdir /mnt
+   fi
+
+   if [ -d "/mnt" ]; then
+      make-mnt-dirs
+      if [[ $? -lt "1" ]]; then
+         export mnt_dirs_live="1"
+      fi
+   else
+      return "$?"
+   fi
+
+}
+
+local home_skel=(
+		$HOME/.alias
+		$HOME/.zshrc
+		$HOME/.config
+		$HOME/.local
+		$HOME/.zsh_history
+		$HOME/bin
+		$HOME/.oh-my-zsh
+		$HOME/.fonts.conf
+		$HOME/iso
+		$HOME/default_webapp
+		$HOME/Documents
+		$HOME/Downloads
+		$HOME/Music
+		$HOME/onedrive
+		$HOME/Pictures
+		$HOME/unzipped
+		$HOME/zip
+		$HOME/yt
+		$HOME/Videos
+		$HOME/duel.mlt
+		$HOME/LightlyShaders
+		$HOME/.gnupg
+		$HOME/gtkrc-2.0
+
+	)
+
+transfer-etc() {
+   revolver --style 'arrow2' start 'Copying selected {etc} files'
+   sleep 3
+   cp -r /main /mnt/main
+
+   cp /etc/default/grub /mnt/master/grub
+
+   cp /etc/bluetooth/main.conf /mnt/master/main.conf
+
+   cp /etc/sudoers /mnt/master/sudoers
+
+   cp /etc/pacman.d/mirrorlist /mnt/master/mirrorlist
+
+   cp /usr/bin/revolver /mnt/master/revolver
+
+   revolver stop
+}
+
+transfer-skel() {
+   revolver --style 'circle' start 'Transfering data to new system. This will take a while'
+   cp -r ${skel} /skel
+
+   cp -r ${main_skel} /m_skel
+   revolver stop
+   revolver --style 'dots12' start 'Transfering data to new system. This will take a while'
+   cp -r ${skel} /mnt/home
+
+   cp -r ${skel} /mnt/root
+   revolver stop
+
+}
+
+transfer-skel-live() {
+   revolver --style 'circle' start 'Transfering data to new system. This will take a while'
+   cp -r ${main_skel} /mnt/main
+   revolver stop
+   revolver --style 'dots12' start 'Transfering data to new system. This will take a while'
+   cp -r ${skel} /mnt/root
+   revolver stop
+
+}
+prep() {
+   foreach fu in /main/source-docs/*; do
+        source $fu
+				if [[ $alias = /main/source-docs/.alias ]]; then
+					source $alias
+				fi
+   done
+
+   export is_skel="yes"
+   setup-dirs
+   if [[ $is_skel = "yes" ]]; then
+      transfer-skel
+      transfer-etc
+      cp /usr/bin/revolver /mnt/usr/bin/revolver \
+      || cp /usr/local/bin/revolver /mnt/master/revolver \
+      || cp /usr/bin/revolver /mnt/master/revolver
+
+   fi
+   export is_skel=''
+
+}
+
+prep-live() {
+   source $so_all
+   revolver --style 'line' start 'Gearing up to prepare new live distro'
+   sleep 3
+   revolver stop
+   setup-dirs-live
+   if [[ $mnt_dirs_live = "1" ]]; then
+      transfer-etc
+      transfer-skel-live
+   fi
+}

@@ -1,0 +1,42 @@
+#!/usr/bin/env zsh
+
+country="US"
+dlotout="65"
+del="60"
+conntout="65"
+proto="https"
+qty="1"
+saveFile="/etc/pacman.d/mirrorlist"
+
+referd() {
+setopt extendedglob
+
+	local default_export=(
+	 'm=/main' \
+	 'sodo=/main/source-docs' \
+	 'all=/main/source-docs/all' \
+	 'expo_all=/main/source-docs/prompt-export' \
+	); \
+	export ${default_export}
+
+	local default_source=(
+	 '/main/source-docs/prompt-export' \
+	 '/main/source-docs/all' \
+	); \
+	source ${default_source}
+
+
+	(
+	sudo reflector --ipv4 --country US --download-timeout 60 --delay 65 --connection-timeout 65 --protocol https --latest 3 --fastest 3 --save /etc/pacman.d/mirrorlist
+	sudo pacman -Syyu
+ 	sudo pacman -Fy
+ 	sudo cat /etc/pacman.d/mirrorlist
+	) |
+	zenity --text-info --auto-scroll
+
+	(( $? !=0 )) && zenity --error -- text="Select OK to finish"
+	return 0
+
+}
+
+

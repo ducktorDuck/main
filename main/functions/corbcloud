@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+# That is a command
+
+corboCloud() {
+
+    wget https://cloudron.io/cloudron-setup
+        chmod +x ./cloudron-setup
+        ./cloudron-setup --setup-token 7971f24a0b38ef3001f22bfd20023e5a31833113ed2d976a3a987b626744a656
+
+}

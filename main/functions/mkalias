@@ -1,0 +1,45 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+mkalias() {
+	source /main/source-docs/all
+	setopt extendedglob
+   #setopt emulate -L zsh
+
+	spinner --style 'line' start 'Parsing current alias files and parameters'
+	sleep 3
+	print "DONE"
+	spinner stop
+
+	select option in 'New' 'Delete' 'Edit' 'Show' 'Add Temp'
+
+		for selection in $option; do
+			read option
+			case $option in
+				1)
+					echo "New alias string? :$alias_string"; read alias_string; return 0
+					;;
+			  *)echo "New alias string? :$alias_string"; read alias_string; return 0
+					;;
+			esac
+
+		done
+
+}
+
+send-alias() {
+source /main/source-docs/all
+	echo "$alias_string" >> /main/source-docs/.alias
+	all
+	s $sodo/.alias
+}
+
+mkali() {
+	mkalias
+	send-alias
+}

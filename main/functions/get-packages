@@ -1,0 +1,30 @@
+#!/bin/zsh
+
+## Main function set
+# Class --Autosource
+
+function \
+get-packages() {
+   source $sodoc/all
+
+   bootstrap
+
+   pac-init
+
+   provision
+
+   refer
+
+   pkg-strap
+
+   transfer-master
+
+   add-user
+
+   ach-chroot passwd
+
+   ach-chroot passwd me
+
+   ach-chroot passwd corbo
+
+}

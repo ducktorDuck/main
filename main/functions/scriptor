@@ -1,0 +1,636 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+
+function scriptor_test() {
+	setopt extendedglob
+
+			export \
+			default_export=( \
+			'm=/main' \
+			'sodo=/main/source-docs' \
+			'all=/main/source-docs/all' \
+			'expo_all=/main/source-docs/prompt-export' \
+			); \
+			export ${default_export} \
+
+			export \
+			default_source=( \
+			'/main/source-docs/prompt-export' \
+			'/main/source-docs/all' \
+			'/main/source-docs/function-autosource' \
+			'/main/source-docs/.alias' \
+			); \
+			source ${default_source}
+
+
+ greeting-mainmenu() {
+   echo -ne "
+   MAIN MENU
+   1) Parameter Menu
+   0) Exit
+   Choose an option:  "
+    read -r ans
+    case $ans in
+    1)
+        greeting-submenu
+        greeting-mainmenu
+        ;;
+    0)
+        echo "Bye bye."
+        exit 0
+        ;;
+    *)
+        echo "Wrong option."
+        exit 1
+        ;;
+    esac
+
+ }
+
+ greeting-submenu() {
+   echo -ne "
+   Parameter Menu
+   1) Parameters
+   2) Variables & Examples
+   3) Go Back to Main Menu
+   0) Exit
+   Choose an option:  "
+    read -r ans
+    case $ans in
+    1)
+        parameter-menu
+        ;;
+    2)
+        greeting-menu
+        ;;
+    3)
+		  greeting-sub-submenu
+		  greeting-submenu
+       ;;
+    0)
+        echo "Bye bye."
+        exit 0
+        ;;
+    *)
+        echo "Wrong option."
+        exit 1
+        ;;
+    esac
+
+ }
+
+ greeting-sub-submenu() {
+   echo -ne "
+   SUB-SUBMENU
+   1) GOOD MORNING
+   2) GOOD AFTERNOON
+   3) Go Back to SUBMENU
+   4) Go Back to MAIN MENU
+   0) Exit
+   Choose an option:  "
+    read -r ans
+    case $ans in
+    1)
+        fn_goodmorning
+        greeting-sub-submenu
+        ;;
+    2)
+        fn_goodafternoon
+        greeting-sub-submenu
+        ;;
+    3)
+        greeting-submenu
+        ;;
+    4)
+        greeting-mainmenu
+        ;;
+    0)
+        echo "Bye bye."
+        exit 0
+        ;;
+    *)
+        echo "Wrong option."
+        exit 1
+        ;;
+    esac
+ }
+
+					{
+
+
+						}
+
+						{
+
+
+					}
+
+
+ init-var(){
+
+   count=0
+   read -p "Enter number: " number
+
+   for (( i=1;i<=$number;i++ ))
+   do
+      for ((j=1;j<=i;j++))
+      do
+
+         if [ `expr $i % $j` -eq 0 ]
+      --   --
+
+      then
+
+            if [ `expr $i / $j` -eq `expr $j + 1` ]
+            then
+               count=`expr $count + 1`;
+               if [ $i  -eq $number ]
+               then
+                  let K=$j+1
+                  let tot=$count*$K
+                  echo "$tot →→ $j X $K"
+               fi
+            fi
+         fi
+      done
+   done
+
+   echo "The total numbers are: "$count
+
+ }
+
+
+
+
+
+ calvin() {
+    assigned=$(zenity --entry --text='What is my assignment?')
+
+    echo "Ok, I will $assigned"
+
+    if [[ $assigned = "make an app" ]] || \
+    [[ $assigned = "Make an app" ]] || \
+    [[ $assigned = "make an application" ]] || \
+    [[ $assigned = "Make an application" ]]; then
+        name_of_new_app=$(zenity --entry --text='Name of New Application?')
+    else
+        zenity --info --text="Continue with assignment $assigned?"
+
+    fi
+
+ progress() {
+    (
+    echo "10"
+    echo "# Initialting" ; sleep 2
+    echo "25"
+    echo "# Running First Tasks..." ; sleep 2
+    echo "40"
+    echo "# Checking Integrity..." ; sleep 2
+    echo "50"
+    echo "# Running Follow-up Tasks.." ; sleep 2
+    echo "65"
+    echo "# Compiling and Generating Files..." ; sleep 2
+    echo "75"
+    echo "# Validating Newely Made Filesystem..." ; sleep 2
+    echo "90"
+    echo "# Almost Finished..." ; sleep 2
+    echo "99"
+    echo "# Checking Everything Out..." ; sleep 2
+    echo "# Done" ; sleep 2
+    echo "100"
+    ) |
+    zenity --progress \
+    --title="Working on $assigned" \
+    --text="Initializing.." \
+    --percentage=0 \
+    --auto-close \
+    --auto-kill
+
+    (( $? !=0 )) && zenity --error -- text="Error in Zenity Command"
+
+    exit 0
+
+ }
+
+ show-output() {
+	source /main/source-docs/prompt-export
+	setopt extendedglob
+   #setopt emulate -L zsh
+   source $sodo/.alias
+   source $sodo/function-autosource
+   source $sodo/all
+	fix-pacman
+
+	(
+
+		yes | sudo pacman -Syyu
+		yes | sudo pacman -Syuu
+		sudo pacman -Fy
+		echo 'test1'
+		echo 'test2'
+		echo 'test3'
+		export end="1"
+		ip a; sleep 1
+
+	) |
+	zenity --text-info --auto-scroll --timeout=20
+
+
+	(( $? !=0 )) && zenity --error --text="Error in Zenity Command"
+
+	exit 0
+
+ }
+
+ pro-out() {
+
+	(
+		echo "2"
+		echo "# Processing..."; sleep 1
+		echo "4"
+		echo "# Processing..."; sleep 1
+		echo "6"
+		echo "# Processing..."; sleep 1
+		echo "8"
+		echo "# Processing..."; sleep 1
+		echo "10"
+		echo "# Processing..."; sleep 1
+		echo "12"
+		echo "# Processing..."; sleep 1
+		echo "14"
+		echo "# Processing..."; sleep 1
+		echo "16"
+		echo "# Processing..."; sleep 1
+		echo "18"
+		echo "# Processing..."; sleep 1
+		echo "20"
+		echo "# Processing..."; sleep 1
+		echo "22"
+		echo "# Processing..."; sleep 1
+		echo "24"
+		echo "# Processing..."; sleep 1
+		echo "26"
+		echo "# Processing..."; sleep 1
+
+	) |
+	zenity --progress \
+	--title="OUTPUT ==>" \
+	--text="Showing log" \
+	--extra-button="HALT PROCESS" \
+	--ok-label="Hide" \
+	--cancel-label="Dismiss" \
+	--extra-button="Send to BG" \
+	--percentage=0 \
+	--time-remaining \
+	--pulsate \
+	--auto-close \
+	--auto-kill
+
+	(( $? !=0 )) && zenity --error --text="Error in Zenity Command"
+
+	exit 0
+
+
+ }
+
+	{
+
+
+
+	}
+
+ }
+
+ music-menu() {
+	source /main/source-docs/all
+	setopt extendedglob
+
+	HEIGHT=15
+	WIDTH=40
+	CHOICE_HEIGHT=4
+	BACKTITLE="Get-Youtube Selection Menu"
+	TITLE="Directory Selection"
+	MENU="Choose the Directory to Download Batchfile to:"
+
+	OPTIONS=(1 "Dubstep Dir"
+				2 "For Mixing Dir"
+				3 "Hip-Hop Dir"
+				4 "Mixes"
+				5 "Create New Directory"
+	)
+
+	CHOICE=$(dialog --clear \
+						 --backtitle "$BACKTITLE" \
+						 --title "$TITLE" \
+						 --menu "$MENU" \
+						 $HEIGHT $WIDTH $CHOICE_HEIGHT \
+						 "${OPTIONS[@]}" \
+						 2>&1 >/dev/tty
+	)
+
+	clear
+	case $CHOICE in
+		1)
+			echo "Dupstep dir chosen";;
+		2)
+			echo "For mixing music dir chosen";;
+		3)
+			echo "Hip-hop dir chosen";;
+		4)
+			echo "Mixes dir chosen";;
+		5)
+			$(CHOICE-submenu);;
+	esac
+
+
+ }
+
+ other-music-menu() {
+	      E='echo -e';e='echo -en';trap "R;exit" 2
+    ESC=$( $e "\e")
+   TPUT(){ $e "\e[${1};${2}H";}
+  CLEAR(){ $e "\ec";}
+  CIVIS(){ $e "\e[?25l";}
+   DRAW(){ $e "\e%@\e(0";}
+  WRITE(){ $e "\e(B";}
+   MARK(){ $e "\e[7m";}
+ UNMARK(){ $e "\e[27m";}
+      R(){ CLEAR ;stty sane;$e "\ec\e[37;44m\e[J";};
+   HEAD(){ DRAW
+           for each in $(seq 1 13);do
+           $E "   x                                          x"
+           done
+           WRITE;MARK;TPUT 1 5
+           $E "BASH SELECTION MENU                       ";UNMARK;}
+           i=0; CLEAR; CIVIS;NULL=/dev/null
+   FOOT(){ MARK;TPUT 13 5
+           printf "ENTER - SELECT,NEXT                       ";UNMARK;}
+  ARROW(){ read -s -n3 key 2>/dev/null >&2
+           if [[ $key = $ESC[A ]];then echo up;fi
+           if [[ $key = $ESC[B ]];then echo dn;fi;}
+     M0(){ TPUT  4 20; $e "Login info";}
+     M1(){ TPUT  5 20; $e "Network";}
+     M2(){ TPUT  6 20; $e "Disk";}
+     M3(){ TPUT  7 20; $e "Routing";}
+     M4(){ TPUT  8 20; $e "Time";}
+     M5(){ TPUT  9 20; $e "ABOUT  ";}
+     M6(){ TPUT 10 20; $e "EXIT   ";}
+      LM=6
+   MENU(){ for each in $(seq 0 $LM);do M${each};done;}
+    POS(){ if [[ $cur == up ]];then ((i--));fi
+           if [[ $cur == dn ]];then ((i++));fi
+           if [[ $i -lt 0   ]];then i=$LM;fi
+           if [[ $i -gt $LM ]];then i=0;fi;}
+REFRESH(){ after=$((i+1)); before=$((i-1))
+           if [[ $before -lt 0  ]];then before=$LM;fi
+           if [[ $after -gt $LM ]];then after=0;fi
+           if [[ $j -lt $i      ]];then UNMARK;M$before;else UNMARK;M$after;fi
+           if [[ $after -eq 0 ]] || [ $before -eq $LM ];then
+           UNMARK; M$before; M$after;fi;j=$i;UNMARK;M$before;M$after;}
+   INIT(){ R;HEAD;FOOT;MENU;}
+     SC(){ REFRESH;MARK;$S;$b;cur=`ARROW`;}
+     ES(){ MARK;$e "ENTER = main menu ";$b;read;INIT;};INIT
+  while [[ "$O" != " " ]]; do case $i in
+        0) S=M0;SC;if [[ $cur == "" ]];then R;$e "\n$(w        )\n";ES;fi;;
+        1) S=M1;SC;if [[ $cur == "" ]];then R;$e "\n$(ifconfig )\n";ES;fi;;
+        2) S=M2;SC;if [[ $cur == "" ]];then R;$e "\n$(df -h    )\n";ES;fi;;
+        3) S=M3;SC;if [[ $cur == "" ]];then R;$e "\n$(route -n )\n";ES;fi;;
+        4) S=M4;SC;if [[ $cur == "" ]];then R;$e "\n$(date     )\n";ES;fi;;
+        5) S=M5;SC;if [[ $cur == "" ]];then R;$e "\n$($e by oTo)\n";ES;fi;;
+        6) S=M6;SC;if [[ $cur == "" ]];then R;exit 0;fi;;
+  esac;POS;done
+
+ }
+
+ output() {
+
+   (
+	 echo "02"
+	 echo "# Generating Code..." ; sleep 0.5
+    echo "04"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "06"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "08"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "10"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "12"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "14"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "16"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "18"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "20"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "22"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "24"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "26"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "28"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "30"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "32"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "34"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "36"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "38"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "40"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "42"
+    echo "# Testing New Code Base..." ; sleep 0.5
+    echo "44"
+    echo "# Testing New Code Base..." ; sleep 0.5
+    echo "46"
+    echo "# Testing New Code Base..." ; sleep 0.5
+    echo "48"
+    echo "# Testing New Code Base..." ; sleep 0.5
+    echo "50"
+    echo "# Testing New Code Base..." ; sleep 0.5
+    echo "52"
+    echo "# Parsing Parameters & Simulating Examples" ; sleep 0.5
+    echo "54"
+    echo "# Parsing Parameters & Simulating Examples" ; sleep 0.5
+    echo "56"
+    echo "# Parsing Parameters & Simulating Examples" ; sleep 0.5
+    echo "58"
+    echo "# Parsing Parameters & Simulating Examples" ; sleep 0.5
+    echo "60"
+    echo "# Validating Newely Made Filesystem..." ; sleep 0.5
+    echo "62"
+    echo "# Validating Newely Made Filesystem..." ; sleep 0.5
+    echo "64"
+    echo "# Validating Newely Made Filesystem..." ; sleep 0.5
+    echo "66"
+    echo "# Compiling and Generating Files..." ; sleep 0.5
+    echo "68"
+    echo "# Compiling and Generating Files..." ; sleep 0.5
+    echo "70"
+    echo "# Compiling and Generating Files..." ; sleep 0.5
+    echo "72"
+    echo "# Compiling and Generating Files..." ; sleep 0.5
+	 echo "74"
+    echo "# Compiling and Generating Files..." ; sleep 0.5
+    echo "76"
+    echo "# Compiling and Generating Files..." ; sleep 0.5
+    echo "78"
+    echo "# Building Enviornment..." ; sleep 0.5
+    echo "80"
+    echo "# Building Enviornment..." ; sleep 0.5
+    echo "82"
+    echo "# Building Enviornment..." ; sleep 0.5
+    echo "84"
+    echo "# Building Enviornment..." ; sleep 0.5
+    echo "86"
+    echo "# Building Enviornment..." ; sleep 0.5
+    echo "88"
+    echo "# Building Enviornment..." ; sleep 0.5
+    echo "89"
+    echo "# Building Enviornment..." ; sleep 0.5
+    echo "90"
+    echo "# Creating Internal Functions" ; sleep 0.5
+    echo "92"
+    echo "# Creating Internal Functions" ; sleep 0.5
+    echo "94"
+    echo "# Creating Internal Functions" ; sleep 0.5
+    echo "96"
+    echo "# Checking Everything Out..." ; sleep 0.5
+    echo "98"
+    echo "# Checking Everything Out..." ; sleep 0.5
+    echo "99"
+    echo "# Checking Everything Out..." ; sleep 0.5
+    echo "# Done" ; sleep 2
+    echo "100"
+    ) |
+    zenity --progress \
+    --title="Working on $assigned" \
+    --text="${words}" \
+    --percentage=0 \
+    --auto-close \
+    --auto-kill
+
+    (( $? !=0 )) && zenity --error --text="Error in Zenity Command"
+
+    exit 0
+
+ }
+
+ display-output() {
+	source /main/source-docs/all
+	setopt extendedglob
+   #setopt emulate -L zsh
+
+	spinner --style 'line' start 'Process Loading..Working on it'
+	sleep 1
+
+
+
+	spinner stop
+
+ }
+
+assignment() {
+   reset
+   source $func/spin
+   spin6
+   echo "This better be good.."
+   select Method in "Self-learn" "Self-decide" "Pass-parameters"; do
+      if [ -n "$Method" ]; then
+         break
+         echo "illegal choice; try again (Ctr-C to exit)"
+      fi
+      case $Method in
+      1)
+         init-var; greeting-mainmenu
+         ;;
+      2)
+         init-var; greeting-submenu
+         ;;
+      3)
+         init-var; secondary-mainmenu && secondary-submenu && secondary-sub-submenu
+         ;;
+     *)
+         ;;
+   esac
+   done
+   echo "$Method Selected."
+
+   spinner --style 'circle' start 'Generating new database'
+   sleep 3
+   spinner stop
+
+   spinner --style 'dots12' start 'Building usable functions & defining'
+   sleep 3
+   spinner stop
+
+   spinner --style 'shark' start 'Writing code base, generating self-init'
+   sleep 3
+   spinner stop
+
+   yes | pacman -S yarn
+
+   cd
+   reset
+   yarn create electron-app The-Magic-Trahcan
+   cd /home/The-Magic-Trahcan/node_modules
+
+   spinner --style 'line' start 'Generating node modules for internal and external use'
+   sleep 3
+   spinner stop
+   cd node_modules
+   spin13
+   reset
+   spinner --style 'arc' start 'Upgrading'
+   sleep 3
+   spinner stop
+
+   spin-ball
+   spin-triangle
+   spinner --style 'line' start 'Installing newly generating scripts, functions, code base, and callable commands'
+   sleep 3
+   spinner stop
+   reset
+   yarn add uglify shelljs
+   cd $HOME/The-Magic-Trashcan/node_modules/uglify-js/lib
+   print "
+
+   DONE"
+   echo "
+
+   $fg_bold[blue]Care to review the code?  There is ALOT of it.  Roughly 139,000 lines of code generated at :$care{$reset_color}
+
+   "
+   read care
+   time
+
+   date
+
+   case $care in
+   y)
+      cd $HOME/The-Magic-Trashcan/node_modules/uglify-js/lib/;
+      echo "$PWD"
+      ;;
+   *)
+      ;;
+   esac
+
+
+ }
+
+}
+
+

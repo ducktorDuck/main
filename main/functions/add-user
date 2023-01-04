@@ -1,0 +1,63 @@
+#!/usr/bin/env zsh
+
+## Main function set
+# Class --Autosource
+
+source /main/source-docs/prompt-export
+
+function \
+add-user() {
+	echo "Create user groups? :$create_new_groups"
+	read create_new_groups
+
+if [[ $create_new_groups = "y" ]] || [[ $create_new_groups = "Y" ]]; then
+   
+   source $func/spin
+   spin-triangle
+   sudo groupadd me
+   sudo groupadd sudo
+   sudo groupadd admin
+   sudo groupadd corbo
+   sudo groupadd $new_user2
+   sudo groupadd $new_user1
+   spin13
+else
+   echo ''
+fi
+}
+name-new() {
+   new_user1=$(zenity --entry --text="Name New User?")
+   new_user2=$(zenity --entry --text="Name of Second New User?")
+}
+add-them() {
+   sudo mkdir "$new_user1"
+   sudo useradd "$new_user1" -g "$new_user2" -G root,sys,network,sudo,admin,corbo,me -s /bin/zsh -d "$new_user1"
+   spin-ball
+   sudo mkdir "$new_user2"
+   sudo useradd "$new_user2" -g "$new_user2" -G root,sys,network,sudo,admin,corbo,me -s /bin/zsh -d "$new_user2"
+}
+assign-them() {
+   sudo chown -R "$new_user1":"$new_user1" "$new_user1"
+   sudo chown -R "$new_user2":"$new_user2" "$new_user2"
+}
+
+mkuser() {
+   name-new
+   add-user
+   add-them
+   assign-them
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,85 @@
+#!/usr/bin/env zsh
+
+## Main function set
+# Class --Autosource
+
+update_internal() {
+   gather_function() {
+      source ~/.head && 'get head'
+   }
+   
+   log_update() {
+      gather_function
+	wait
+
+      echo $(pi) >>log.pid 2>&1
+      if [ -d "/.log" ]; then
+         sudo chmod -R a+w /.log; mine /.log
+         if [ -f "/.log/update.log" ]; then
+            rm /.log/update.log
+         fi
+      fi
+      if [ ! -d "/.log" ]; then
+         sudo mkdir /.log
+         sudo chmod -R a+w /.log; mine /.log
+         if [ ! -f "/.log/update.log" ]; then
+            sudo touch /.log/update.log
+            sudo chmod -R a+w /.log; mine /.log
+         fi
+      fi
+      clear
+   }
+
+   make_desicion() {
+
+      for decision in $?; do
+         log_update
+         decision="$?"
+            if [[ $desicion -gt 0 ]]; then
+               fix-pacman
+            fi
+            am_i_non_zero=$(echo $decision)
+         while [[ $am_i_non_zero -eq 0 ]]; do
+            break
+         done
+      done
+   }
+
+
+   do_update() {
+      make_desicion; wait
+         (
+      yes | sudo pacman -Syyu
+      yes | sudo pacman -Syuu
+      sudo pacman -Fy
+      yes | yay
+      gem update || \
+      if [ ! -f "/usr/bin/gem" ]; then
+         do_gem_again="1"
+         yes | sudo pacman -S ruby; sleep 0.5
+      fi
+      if [[ $do_gem_again = "1" ]]; then
+         gem update
+      fi
+         ) |
+         zenity --text-info --auto-scroll --title="OUTPUT ==>" --text="UPDATING.." --timeout=7
+
+         (( $? !=0 )) && zenity --error --text="Error in Zenity Command"
+
+      exit 0
+
+      spit_message() {
+         do_update; wait
+         if [[ $? -lt 1 ]]; then
+            echo "System updated without errors"
+         else
+            echo "Error $? found: System still updated as much as possible."
+         fi
+      }
+
+   }
+   do_update && spit_message
+
+}
+
+update_internal

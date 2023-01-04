@@ -1,0 +1,159 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+gen-progress() {
+	source /main/source-docs/all
+	setopt extendedglob
+   #setopt emulate -L zsh
+
+   tmux new -d 'echo $(pacman -Syyu; sensors; pacman -Ss read) >> output.log & disown'
+
+    (
+	 echo "02"
+	 echo $(cat output.log)
+    echo "# Initialting" ; sleep 0.5
+    echo "04"
+    echo $(cat output.log)
+    echo "# Initialting" ; sleep 0.5
+    echo "06"
+    echo $(cat output.log)
+    echo "# Initialting" ; sleep 0.5
+    echo "08"
+    echo "# Initialting" ; sleep 0.5
+    echo "10"
+    echo "# Initialting" ; sleep 0.5
+    echo "12"
+    echo "# Checking Integrity..." ; sleep 0.5
+    echo "14"
+    echo "# Checking Integrity..." ; sleep 0.5
+    echo "16"
+    echo "# Checking Integrity..." ; sleep 0.5
+    echo "18"
+    echo "# Running Follow-up Tasks.." ; sleep 0.5
+    echo "20"
+    echo "# Running Follow-up Tasks.." ; sleep 0.5
+    echo "22"
+    echo "# Compiling and Generating Files..." ; sleep 0.5
+    echo "24"
+    echo "# Compiling and Generating Files..." ; sleep 0.5
+    echo "26"
+    echo "# Validating Newely Made Filesystem..." ; sleep 0.5
+    echo "28"
+    echo "# Validating Newely Made Filesystem..." ; sleep 0.5
+    echo "30"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "32"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "34"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "36"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "38"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "40"
+    echo "# Generating Code..." ; sleep 0.5
+    echo "42"
+    echo "# Testing New Code Base..." ; sleep 0.5
+    echo "44"
+    echo "# Testing New Code Base..." ; sleep 0.5
+    echo "46"
+    echo "# Testing New Code Base..." ; sleep 0.5
+    echo "48"
+    echo "# Testing New Code Base..." ; sleep 0.5
+    echo "50"
+    echo "# Testing New Code Base..." ; sleep 0.5
+    echo "52"
+    echo "# Parsing Parameters & Simulating Examples" ; sleep 0.5
+    echo "54"
+    echo "# Parsing Parameters & Simulating Examples" ; sleep 0.5
+    echo "56"
+    echo "# Parsing Parameters & Simulating Examples" ; sleep 0.5
+    echo "58"
+    echo "# Parsing Parameters & Simulating Examples" ; sleep 0.5
+    echo "60"
+    echo "# Validating Newely Made Filesystem..." ; sleep 0.5
+    echo "62"
+    echo "# Validating Newely Made Filesystem..." ; sleep 0.5
+    echo "64"
+    echo "# Validating Newely Made Filesystem..." ; sleep 0.5
+    echo "66"
+    echo "# Compiling and Generating Files..." ; sleep 0.5
+    echo "68"
+    echo "# Compiling and Generating Files..." ; sleep 0.5
+    echo "70"
+    echo "# Compiling and Generating Files..." ; sleep 0.5
+    echo "72"
+    echo "# Compiling and Generating Files..." ; sleep 0.5
+	 echo "74"
+    echo "# Compiling and Generating Files..." ; sleep 0.5
+    echo "76"
+    echo "# Compiling and Generating Files..." ; sleep 0.5
+    echo "78"
+    echo "# Building Enviornment..." ; sleep 0.5
+    echo "80"
+    echo "# Building Enviornment..." ; sleep 0.5
+    echo "82"
+    echo "# Building Enviornment..." ; sleep 0.5
+    echo "84"
+    echo "# Building Enviornment..." ; sleep 0.5
+    echo "86"
+    echo "# Building Enviornment..." ; sleep 0.5
+    echo "88"
+    echo "# Building Enviornment..." ; sleep 0.5
+    echo "89"
+    echo "# Building Enviornment..." ; sleep 0.5
+    echo "90"
+    echo "# Creating Internal Functions" ; sleep 0.5
+    echo "92"
+    echo "# Creating Internal Functions" ; sleep 0.5
+    echo "94"
+    echo "# Creating Internal Functions" ; sleep 0.5
+    echo "96"
+    echo "# Checking Everything Out..." ; sleep 0.5
+    echo "98"
+    echo "# Checking Everything Out..." ; sleep 0.5
+    echo "99"
+    echo "# Checking Everything Out..." ; sleep 0.5
+    echo "# Done" ; sleep 2
+    echo "100"
+    ) |
+    zenity --progress \
+    --title="Working on $assigned" \
+    --text="Initializing.." \
+    --percentage=0 \
+    --auto-close \
+    --auto-kill
+
+    (( $? !=0 )) && zenity --error --text="Error in Zenity Command"
+
+    exit 0
+
+}
+
+interchangable-progress() {
+    (
+    echo "10"
+    echo "#$echozen" ; sleep 2
+    echo "20"
+    echo "#$echozen" ; sleep 2
+    echo "30"
+    echo "#$echozen" ; sleep 2
+    ) |
+    zenity --progress \
+    --pulsate \
+    --title="$echozen" \
+    --text="Initializing $echozen" \
+    --percentage=0 \
+    --autoclose \
+    --autokill
+
+    (( $? !=0 )) && zenity --error --text="Error on zenity"
+
+    exit 0
+
+}

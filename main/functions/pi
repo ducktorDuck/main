@@ -1,0 +1,34 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+pi() {
+	source /main/source-docs/all
+	setopt extendedglob
+   #setopt emulate -L zsh
+
+	spinner --style 'line' start 'Process Loading..Working on it'
+	sleep 3
+
+	spinner stop
+
+	for name in "$0"; do
+		print "
+		"
+		date;
+		echo "Function/program name: $name"
+
+		for i in "$$"; do
+			echo "SHELL PID: $i"
+			for num in "$PPID"; do
+				echo "Previous PID: $num"
+			done
+		done
+	done
+
+}
+

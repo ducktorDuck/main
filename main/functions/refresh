@@ -1,0 +1,112 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+
+uppers() {
+	setopt extendedglob
+	pkglist=$func/pkglist
+
+	foreach i in /main/source-docs/*; do
+		source $i
+			if [[ $sodo = /main/source-docs ]]; then
+            source $alias
+         fi
+	done
+
+
+		foreach l in \
+			$(
+				cat $pkglist
+			) ; do
+				yes |
+				pacstrap /mnt $l
+		done
+
+}
+
+addto() {
+	pkglist=$func/pkglist
+
+	add=$(
+		zenity --entry \
+		--title="Add To List of PKG's" \
+		--text="Add  **NOTE** Separate PKG's with a spac" \
+		--ok-label="finished"
+	)
+
+		removed=$(
+			zenity --info \
+			--title="Remove old?" \
+			--text="Remove the old list?" \
+			--ok-label="yes"
+
+		)
+
+	if [[ $removed = [yY] ]]; then
+
+		sed -i 's/^/#/' $pkglist
+		echo " $add " > $pkglist
+		uppers
+
+	else
+		echo " $add " >> $pkglist
+		uppers
+
+	fi
+
+}
+
+guiup() {
+	foreach i in /main/source-docs/*; do
+		source $i
+			if [[ $sodo = /main/source-docs ]]; then
+            source $alias
+         fi
+	done
+
+	alias Repo='pacman -Syyu \
+	; pacman -Syuu \
+	; pacman -Fy'
+	alias Add='sudo'
+
+	string=$(
+		zenity --forms \
+				--add-combo="Field" \
+				--combo-values="Update|Removal|Add|Edit" \
+				--add-combo="Piped Command" \
+				--combo-values=" yes | echo $o " \
+				--add-combo="Command" \
+				--combo-values=" pacman | gem | yay | Full " \
+				--add-combo="Packages" \
+				--combo-values=" AUR | Repo | Ruby | All | Batchfile " \
+				--show-header \
+				--title="Updater" \
+				--text="Update" \
+				--separator=')('
+
+			 )
+
+	for n in $string ; do
+		echo "Command String:'($n)'"
+			if echo $n | grep -q "Update"; then
+				if echo $n | grep -q "Repo"; then
+					sudo pacman -Syyu
+				fi
+			fi
+			if echo $n | grep -q "Add"; then
+				if echo $n | grep -q "pacman"; then
+					if echo $n | grep -q "Batchfile"; then
+						addto
+					fi
+				fi
+			fi
+
+	done
+
+
+}

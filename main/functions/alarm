@@ -1,0 +1,117 @@
+#!/usr/bin/env bash
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: BASH
+## Type: Shell
+
+
+alarm() {
+
+	local default_export=(
+	 "m=/main" \
+	 "sodo=/main/source-docs" \
+	 "all=/main/source-docs/all" \
+	 "expo_all=/main/source-docs/prompt-export" \
+	); \
+	export ${default_export}
+
+	local default_source=(
+	 "/main/source-docs/prompt-export" \
+	 "/main/source-docs/all" \
+	); \
+	source ${default_source}
+
+	Encoding=UTF-8
+
+	export TEXTDOMAIN=alert_clock
+	export TEXTDOMAINDIR="/usr/share/locale"
+
+	TITLE=alert_clock
+	VERSION=0.32
+	ICON=/usr/share/icons/wecker.png
+
+	function yad-menu {
+		COUNTDOWN=$(yad --entry --text $"Enter minutes...!" --title="$TITLE"" $VERSION" --window-icon=$ICON \
+						--image=$ICON \
+						--button=$"Change:2" \
+						--button=$"Test:3" \
+						--button="gtk-ok:0" \
+						--button="gtk-close:1" \
+					)
+		ret=$?
+
+		[[ $ret -eq 1 ]] && exit 0
+		#
+		#change sound - Sound ändern
+		#
+		if [[ $ret -eq 2 ]]; then
+			CHANGE=$(yad --title="$TITLE"" $VERSION" --window-icon=$ICON \
+				--file --width=600 --height=500 \
+				--text=$"<b>Choose your own audio file as alert!</b>
+		________________________________________________")
+				if [ -z "$CHANGE" ];then
+					exec alert_clock
+					exit 0
+				else
+					mkdir $HOME/.config/alert-clock
+					rm -rf $HOME/.config/alert-clock/alert sleep 1
+					ln -s "$CHANGE" $HOME/.config/alert-clock/alert
+					yad --title $"$TITLE"" $VERSION" \
+						--button="gtk-ok:0" \
+						--width 300 \
+						--window-icon=$ICON \
+						--text=$"Your own sound is set!!"
+				fi
+		yad-menu
+		fi
+
+	if [[ $ret -eq 3 ]]; then
+		if [ -f $HOME/.config/alert-clock/alert ]; then
+			SOUND="$HOME/.config/alert-clock/alert"
+		else
+			SOUND='/usr/share/alert_clock/alarm.ogg'
+		fi
+			mplayer "$SOUND" | yad --title $"$TITLE"" $VERSION" \
+						--button="gtk-ok:0" \
+						--width 300 \
+						--window-icon=$ICON \
+						--text=$"Exit sound test!!"
+		killall mplayer
+		yad-menu
+	fi
+
+	}
+
+	yad-menu
+
+	if [ "$COUNTDOWN" = "" ];then
+		exit
+	else
+		echo you enter "$COUNTDOWN" minutes
+		TIMER=$(echo $(($COUNTDOWN*60)))
+		TASK1=$(date -s "+$TIMER seconds" 2>/dev/null | cut -d " " -f4)
+		exec 3> >(yad --notification --command=CMD --image=$ICON --listen)
+		echo tooltip: $"Alarm clock was set to $COUNTDOWN minutes and notifiers at $TASK1!" >&3
+		sleep $TIMER
+		exec 3>&-
+
+		if [ -f $HOME/.config/alert-clock/alert ]; then
+			SOUND="$HOME/.config/alert-clock/alert"
+			else
+			SOUND='/usr/share/alert_clock/alarm.ogg'
+		fi
+
+		(mplayer -loop 0 "$SOUND") | yad --title $"$TITLE"" $VERSION" \
+			--button="gtk-ok:0" \
+			--width 300 --image=$ICON \
+			--window-icon=$ICON \
+			--text=$"<b>Time is over!!</b>"
+			exit;
+	fi
+	exit
+
+
+}
+

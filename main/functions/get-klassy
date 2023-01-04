@@ -1,0 +1,20 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+get-klassy() {
+	source /main/source-docs/all
+	setopt extendedglob
+   #setopt emulate -L zsh
+
+
+
+	echo "n" | echo "1" | yay klassy >> /dev/null
+
+
+}
+

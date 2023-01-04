@@ -1,0 +1,62 @@
+#!/usr/bin/env zsh
+
+
+function \
+add-func() {
+   source ~/.head && 'get head'
+	func="/main/functions"
+	fsource="/main/source-docs/function-autosource"
+	admin="me"
+
+   sudo chown -R "$admin":"$admin" /main
+   sudo chown -R "$admin":"$admin" $HOME
+   sudo chmod a+x "$fsource"
+   sudo chown -R "$admin":"$admin" "$fsource"
+	echo "Name of new function? :$funcd"
+	read funcd
+
+	cd "$func"
+	sudo touch "$func"/"$funcd"
+	sudo chown -R "$admin":"$admin" "$func"/"$funcd"
+
+	echo "source $func/$funcd" >> "$fsource"
+
+	echo '#!/usr/bin/env "$SHELL"
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: $SHELL
+## Type: Shell' \
+	>> "$func"/"$funcd"
+echo "
+
+${funcd}() {
+	setopt extendedglob" \
+	>> "$func"/"$funcd"
+	echo '
+
+	for files in /main/source-docs/*; do
+           source $files
+	   if [ ! -e "/main/source-docs/alias" ]; then
+	      echo "Alias local cannot be found"
+	   else
+	      for src_alias in /main/source-docs/alias; do
+	         source $src_alias
+	      done
+	   fi
+	done
+	unset files; export files=''
+	unset src_alias; export src_alias=''
+}
+' \
+	>> "$func"/"$funcd"
+
+	sudo chown "$admin":"$admin" "$func"/"$funcd"
+	sudo chmod a+x "$func"/"$funcd"
+
+	kate -b --start 'main' "$func"/"$funcd" && exit 0 &
+
+	export funcd=''
+	unset funcd
+}

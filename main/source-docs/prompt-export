@@ -1,0 +1,97 @@
+# Exports for Installation
+
+export ma="/master"
+export m="/main"
+export mm="/mnt/main"
+export mma="/mnt/master"
+export locals="/main/source-docs/locals"
+export sodo="/main/source-docs"
+export btkb="F4:73:35:6E:47:66"
+export all="$sodoc/all"
+export f="$m/functions"
+export scr="$m/scripts"
+export is="$?"
+export this="$0"
+export was="$$"
+export zinit="$scr/zinit.sh"
+
+export nv="/dev/nvme0n1"
+export nv1="/dev/nvme0n1p1"
+export nv2="/dev/nvme0n1p2"
+export nv3="/dev/nvme0n1p3"
+export nv4="/dev/nvme0n1p4"
+export nv5="/dev/nvme0n1p5"
+export nv6="/dev/nvme0n1p6"
+
+export sda="/dev/sda"
+export sda1="/dev/sda1"
+export sda2="/dev/sda2"
+export sda3="/dev/sda3"
+export sda4="/dev/sda4"
+export sda1="/dev/sda1"
+export sda2="/dev/sda2"
+export sda3="/dev/sda3"
+export sda4="/dev/sda4"
+
+export sdb="/dev/sdb"
+export sdb1="/dev/sdb1"
+export sdb2="/dev/sdb2"
+export sdb3="/dev/sdb3"
+export sdb4="/dev/sdb4"
+export sdb1="/dev/sdb1"
+export sdb2="/dev/sdb2"
+export sdb3="/dev/sdb3"
+export sdb4="/dev/sdb4"
+
+export x="/usr"
+export xb="/usr/bin"
+export xsb="/usr/sbin"
+export xl="/usr/local"
+export xs="/usr/share"
+export xl="/usr/lib"
+
+export b="/bin"
+export sb="/sbin"
+export va="/var"
+export li="/lib"
+export ma="/master"
+export m="/main"
+
+export safpa="$xl/sbin:$xl/bin:$xb:$xsb:$b:$sb"
+export usafpa="$b:$sb:$va:$li:$ma:$m"
+export perpa="$xb/site_perl:$xb/vendor_perl:$xb/core_perl"
+export mepa="$HOME/bin:$HOME/.local/bin"
+export mefupa="$fbin:$func"
+
+export xenv="/usr/bin/env"
+export func="$f"
+export fsource="/main/source-docs/function-autosource"
+export plugs="/main/scripts"
+export theme="$HOME/bin/theme"
+export ubin="$HOME/bin"
+export syntax="$plugs/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+export suggest="$plugs/zsh-autosuggestions.zsh"
+export substring="$plugs/zsh-history-substring-search.zsh"
+export sorcery="$ubin/sorcery"
+export alian="$HOME/alias"
+export zshrc="$HOME/.zshrc"
+
+export MANPATH="/usr/local/man:$MANPATH"
+export LANG="en_US.UTF-8"
+export ARCHFLAGS="-arch x86_64"
+export yt_batchfile="/home/yt/batchfile"
+export script="/main/scripts"
+export mlist="/etc/pacman.d/mirrorlist"
+export pe="/main/source-docs/prompt-export"
+export alias="$sodo/alias"
+export mirror="/etc/pacman.d/mirrorlist"
+
+
+alias y='TITLE="$$";TEXT="$0"; 'yad --width=500 --center --window-icon="gtk-execute" --name="${0##*/}" --title="$TITLE" --text="$TEXT" --image="gtk-execute" --entry --editable --rest="$HISTFILE" ' '
+
+export mina=/main/mina
+export scmina=/main/mina/scripts
+export fmina=/main/mina/functions
+export sourmina=/main/mina/source-docs
+export webdir="/main/mina/dev/web"
+export Webdir="/main/mina/dev/web"

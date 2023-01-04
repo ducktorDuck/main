@@ -1,0 +1,39 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+get-pid() {
+	source /main/source-docs/all
+	setopt extendedglob
+   #setopt emulate -L zsh
+
+	spinner --style 'line' start 'Obtaining PIDs'
+	sleep 2
+
+   for name in "$0"; do
+		print "
+		"
+		date;
+		echo "Function/program name: $name"
+
+		for i in "$$"; do
+			echo "SHELL PID: $i"
+
+			for num in "$PPID"; do
+				echo "Previous PID: $num"
+				print "
+				"
+				time
+
+			done
+		done
+	done
+
+
+	spinner stop
+}
+

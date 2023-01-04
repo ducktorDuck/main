@@ -1,0 +1,44 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+wiped() {
+	source /main/source-docs/all
+	setopt extendedglob
+   #setopt emulate -L zsh
+
+   echo "Disk 1? :$first_to_shred"
+   read first_to_shred
+
+	echo "Disk 2? :$first_to_shred"
+   read second_to_shred
+
+   echo "Disk 3? :$first_to_shred"
+   read third_to_shred
+
+   echo "Disk 4? :$first_to_shred"
+   read fourth_to_shred
+
+	spinner --style 'line' start 'Process Loading..shredding firt disk 3 times'
+	sleep 3
+	sudo shred -v -z --exact --remove=wipesync --iterations 3 "$first_to_shred"
+	spinner stop
+
+	spinner --style 'line' start 'Process Loading..shredding second disk 3 times'
+	sudo shred -v -z --exact --remove=wipesync --iterations 3
+	"$second_to_shred"
+	spinner stop
+
+	spinner --style 'line' start 'Process Loading..shreddinng third disk 3 times'
+	sudo shred -v -z --exact --remove=wipesync --iterations 3 "$third_to_shred"
+	spinner stop
+
+	spinner --style 'line' start 'Process Loading..shredding fourth disk 3 times'
+	sudo shred -v -z --exact --remove=wipesync --iterations 3 "$fourth_to_shred"
+	spinner stop
+}
+

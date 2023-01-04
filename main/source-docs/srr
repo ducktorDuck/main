@@ -1,0 +1,37 @@
+
+
+alias mina-composer='composer'
+alias corbi-composite='yad'
+alias corbi-composePHP='composer'
+alias corb-composer='composer'
+
+alias corbi-hides='gnome-boxes'
+alias corbi-build='sudo docker build'
+alias corbi-get='sudo docker pull'
+alias corbi-login='sudo docker login'
+alias corbi-init='sudo gti init'
+
+alias lscbin='ls -a /cbin/dev'
+alias cdcbin='cd /cbin/dev'
+alias cmdMina='composer --help'
+alias mkMina='cd $webdir || cd /main/mina/dev/web; composer create-project laravel/laravel frontend'
+
+alias MinaStrings='cd $webdir/frontend; sudo mkdir nodery; cd nodery; sudo yarn import; sudo yarn create electron-app open_me; sudo yarn add uglify; sudo yarn add lint; sudo yarn upgrade'
+
+alias cdmina='cd $mina'
+alias cdscmina='cd $scmina'
+alias cdfmina='cd $fmina'
+alias cdsmina='cd $smina'
+alias cdweb='cd $webdir'
+alias cdpdir='cd $pdir'
+
+
+alias corbi-compose='sudo docker compose'
+alias corbi-snag='sudo docker pull'
+alias corbi='sudo docker'
+alias docker='sudo docker'
+
+alias mina-compose='sudo docker compose'
+
+alias corb-compose='sudo docker-compose'
+alias corb-run='sudo docker run'

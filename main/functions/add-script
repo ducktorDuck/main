@@ -1,0 +1,74 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+
+add-script() {
+	setopt extendedglob
+
+
+	foreach fu in /main/source-docs/*; do
+        source $fu
+				if [[ $alias = /main/source-docs/.alias ]]; then
+					source $alias
+				fi
+    done
+
+	scri="/main/scripts"
+	administrator="me"
+	scriptList="$scri/list"
+		if [ ! -f "$scriptList" ]; then
+			sudo touch $scriptList
+			mine $scriptList
+		fi
+
+	sudo chown -R "$administrator":"$administrator" /main
+	sudo chown -R "$administrator":"$administrator" /home
+	sudo chmod -R a+x "$scri"
+	sudo chown -R "$administrator":"$administrator" "$scri"
+		echo "Name of new script? :$nscrip"
+		read nscrip
+
+		cd "$scrri"
+		sudo touch "$scri"/"$nscrip"
+		sudo chown -R "$administrator":"$administrator" "$scri"/"$nscrip"
+
+	echo "source $scri/$nscrip" >> "$scriptList"
+
+	echo '#!/usr/bin/env zsh
+
+## Description: Script
+## Class: General
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell' \
+	>> "$scri"/"$nscrip"
+echo "
+
+${nscrip}() {
+	setopt extendedglob" \
+	>> "$scri"/"$nscrip"
+	echo '
+
+	foreach fu in /main/source-docs/*; do
+        source $fu
+				if [[ $alias = /main/source-docs/.alias ]]; then
+					source $alias
+				fi
+    done
+}
+' \
+	>> "$scri"/"$nscrip"
+
+	sudo chown me:me "$scri"/"$nscrip"
+	sudo chmod a+x "$scri"/"$nscrip"
+
+	kate -b --start 'main' "$scri"/"$nscrip" && exit 0
+
+	export nscrip=''
+}
+

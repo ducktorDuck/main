@@ -1,0 +1,28 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+get-lightly() {
+
+ {
+
+	source ~/.head && 'gethead'
+
+	 if [ ! -e $HOME/bin ]; then
+		  mkdir $HOME/bin
+	 fi
+	cd $HOME/bin || return 69
+
+	yes | pacd cmake rhash extra-cmake-modules jsoncpp qt5-xmlpatterns kinit kde-dev-utils
+	wait
+ 
+	echo "4 7" | yay --useask --answerdiff none --answeredit no --answerclean yes lightly
+
+ }
+
+}
+

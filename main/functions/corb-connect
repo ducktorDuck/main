@@ -1,0 +1,218 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+function \
+\
+corb-connect() {
+    for fu in /main/source-docs/*; do
+        echo ''
+        foreach i in $fu; do
+            source $i
+            source $alias
+        done
+    done
+
+    hide-kdeconn() {
+        setopt extendedglob
+
+        for sorcery in /main/source-docs/*; do
+                echo "Enabled: $sorcery"
+                foreach i in $sorcery; do
+                    source $i
+                    source $alias
+                done
+            done
+ # make the headers active to be safe. Over kill but its ok
+            declare \
+            corb_connd="/usr/lib/kdeconnectd-disabled"
+            declare \
+            corb_conn="/usr/lib/kdeconnectd"
+        # j as disabled
+                for j in $corb_connd; do
+                    if [ -e "$j" ]; then
+                        echo "Exist: $j"
+                        this="$j"
+        # k as enabled
+                        that="$k"
+                    elif [ ! -e "$j" ]; then
+                        echo "Exist: $k"
+                        this="$k"
+        # this & that
+                        that="$k"
+                    fi
+        # same but in reverse for good measure
+                        for k in $corb_conn; do
+                            if [ -e "$k" ]; then
+                                echo "Exist: $k"
+                                this="$k"
+        # k as disabled
+                                that="$j"
+                            elif [ ! -e "$k" ]; then
+                                this="$j"
+        # j as enabled
+                                that="$k"
+                            fi
+        # this and that
+                                for this_or_that in $this; do
+                                    echo "
+                                        Current: $this
+                                        TRFR: $that
+                                        "
+                                    for decision in $this_or_that; do
+                                        sudo mv $this $that
+                                        echo "Active: $that"
+                                    done
+                        # done
+                                done
+                    # done
+                        done
+                # done
+                done
+            # end
+        }
+
+        hide-kded() {
+            declare \
+            corb_connd="/usr/bin/kded5-disabled"
+            declare \
+            corb_conn="/usr/bin/kded5"
+
+                for j in $corb_connd; do
+                    if [ -e "$j" ]; then
+                        echo "Exist: $j"
+                        this="$j"
+
+                        that="$k"
+                    elif [ ! -e "$j" ]; then
+                        echo "Exist: $k"
+                        this="$k"
+
+                        that="$k"
+                    fi
+
+                        for k in $corb_conn; do
+                            if [ -e "$k" ]; then
+                                echo "Exist: $k"
+                                this="$k"
+
+                                that="$j"
+                            elif [ ! -e "$k" ]; then
+                                this="$j"
+
+                                that="$k"
+                            fi
+
+                                for this_or_that in $this; do
+                                    echo "
+                                        Current: $this
+                                        TRFR: $that
+                                        "
+                                    for decision in $this_or_that; do
+                                        sudo mv $this $that
+                                        echo "Active: $that"
+                                    done
+
+                                done
+
+                        done
+
+                done
+
+
+        }
+
+        hide-pw() {
+            declare \
+            corb_connd="/usr/lib/org_kde_powerdevil-disabled"
+            declare \
+            corb_conn="/usr/lib/org_kde_powerdevil"
+
+                for j in $corb_connd; do
+                    if [ -e "$j" ]; then
+                        echo "Exist: $j"
+                        this="$j"
+
+                        that="$k"
+                    elif [ ! -e "$j" ]; then
+                        echo "Exist: $k"
+                        this="$k"
+
+                        that="$k"
+                    fi
+
+                        for k in $corb_conn; do
+                            if [ -e "$k" ]; then
+                                echo "Exist: $k"
+                                this="$k"
+
+                                that="$j"
+                            elif [ ! -e "$k" ]; then
+                                this="$j"
+
+                                that="$k"
+                            fi
+
+                                for this_or_that in $this; do
+                                    echo "
+                                        Current: $this
+                                        TRFR: $that
+                                        "
+                                    for decision in $this_or_that; do
+                                        sudo mv $this $that
+                                        echo "Active: $that"
+                                    done
+
+                                done
+
+                        done
+
+                done
+
+        }
+
+    hide-set() {
+        for q in /main/source-docs/prompt-export; do
+
+            set=( "$(hide-kdeconn)" "$(hide-kded)" "$(hide-pw)" )
+            foreach t in ${set}; do
+                $(. ${t})
+            done
+        done
+
+    }
+
+}
+
+hide() {
+    corb-connect
+    hide-set >/dev/null 2>&1
+
+    if [ -e "/usr/lib/kdeconnectd" ]; then
+        echo "File : KDECONNECT"
+        echo "Status: enabled"
+    elif [ -e "/usr/lib/kdeconnectd-disabled" ]; then
+        echo "File : KDECONNECT"
+        echo "Status: disabled"
+    fi
+
+    if [ -e "/usr/bin/kded5" ]; then
+        echo "File : KDED5"
+        echo "Status: enabled"
+    elif [ -e "/usr/bin/kded5-disabled" ]; then
+        echo "File : KDED5"
+        echo "Status: disabled"
+    fi
+
+    if [ -e "/usr/lib/org_kde_powerdevil" ]; then
+        echo "File : POWERDEVIL"
+        echo "Status: enabled"
+    elif [ -e "/usr/lib/org_kde_powerdevil-disabled" ]; then
+        echo "File : POWERDEVIL"
+        echo "Status: disabled"
+    fi
+
+}

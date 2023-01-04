@@ -1,0 +1,25 @@
+
+halo() {
+
+    echo "$*" >> ~/input.txt
+
+}
+
+halo antispam 2
+
+sleep 0.3
+
+halo sv_log_enabled 1
+
+sleep 0.3
+
+halo no_lead 1
+
+sleep 0.3
+
+halo sv_maxplayers 16
+
+sleep 0.3
+
+halo chat_console_echo 1
+

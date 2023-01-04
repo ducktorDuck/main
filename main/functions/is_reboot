@@ -1,0 +1,57 @@
+#!/bin/zsh
+
+## Main function set
+# Class --Autosource
+
+init-install() {
+   foreach i in /main/source-docs/*; do
+		source $i
+			if [[ $sodo = /main/source-docs ]]; then
+            source $alias
+         fi
+	done
+
+		provision
+
+		passwd
+
+		mkuser() {
+			groupadd_list=( me corbo admin spare us sudo  )
+			useradd_list=( me corbo us spare openbox  )
+			sudo mkdir /users
+				for name in $groupadd_list; do
+					echo $name
+					foreach NAME in $name; do
+						sudo groupadd $NAME
+					done
+				done
+
+				export name=''
+				export NAME=''
+
+				for name in $useradd_list; do
+					echo "Adding user: $name"
+					foreach NAME in $name; do
+
+						sudo mkdir /users/$NAME
+						sudo useradd $NAME -g me -d /users/$NAME -s /bin/zsh -G sys,root,network,wheel,sudo,admin
+					done
+				done
+
+		}
+
+		mkuser
+
+		passwd me
+		passwd corbo
+		passwd us
+		passwd spare
+		passwd openbox
+
+		reb=$(zenity --entry --text="Reboot?")
+		if [[ $reb = [yY] ]]; then
+			sudo systemctl reboot
+		fi
+
+}
+

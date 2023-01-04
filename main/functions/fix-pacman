@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+fix-pacman() {
+	source /main/source-docs/all
+	setopt extendedglob
+   #setopt emulate -L zsh
+
+	spinner --style 'line' start 'Process Loading..Working on it'
+	sleep 3
+
+	if [ -f "/var/lib/pacman/db.lck" ]; then
+		sudo rm /var/lib/pacman/db.lck
+	fi
+
+	spinner stop
+}
+

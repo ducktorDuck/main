@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+## Main function set
+# Class --Autosource
+
+function \
+pac-init() {
+   source $func/spin
+   spin5
+   pacman-key --init
+   pacman-key --populate
+   spin-triangle
+   yes | pacman -Syyu
+   pacman -Fy
+}

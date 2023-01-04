@@ -1,0 +1,47 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+got-drive() {
+	source /main/source-docs/all
+	setopt extendedglob
+   #setopt emulate -L zsh
+
+	spinner --style 'line' start 'Process Loading..Working on it' >>/dev/null
+	sleep 3
+
+	if [ ! -d "$HOME/onedrive" ]; then
+		sudo mkdir $HOME/onedrive
+	fi
+		if [ -d "$HOME/onedrive" ]; then
+
+			sudo chmod -R a+x,a+w $HOME/onedrive || sudo chmod a+x,a+w $PWD
+			sudo chown -R me:me $HOME/onedrive || sudo chown -R me:me $PWD
+		fi
+
+
+	cd $HOME/onedrive || return 69
+
+	if [[ $? = 0 ]]; then
+		export rclone_done="1"
+
+
+	fi
+
+	if [[ $PWD = "$HOME/onedrive" ]]; then
+		 rclone --vfs-cache-mode writes mount 'one:' "$PWD" >>/dev/null
+	else
+		echo "rclone mount not successful.  Returning to prompt"
+		return 69
+	fi
+
+	spinner stop
+}
+
+get-drive() {
+	got-drive &
+}

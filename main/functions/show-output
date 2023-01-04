@@ -1,0 +1,85 @@
+#!/usr/bin/env zsh
+
+## Description: Function
+## Class: Autosource
+## Licence: GLL / GLS
+## Scriptor: ZSH
+## Type: Shell
+
+show-output() {
+	source /main/source-docs/prompt-export
+	setopt extendedglob
+   #setopt emulate -L zsh
+   source $sodo/.alias
+   source $sodo/function-autosource
+   source $sodo/all
+	pac-fix
+	(
+		yes | sudo pacman -Syyu
+		yes | sudo pacman -Syuu
+		sudo pacman -Fy
+		echo 'test1'
+		echo 'test2'
+		echo 'test3'
+		export end="1"
+		ip a; sleep 1
+	) |
+	zenity --text-info --auto-scroll --timeout=20
+
+
+	(( $? !=0 )) && zenity --error --text="Error in Zenity Command"
+
+	exit 0
+
+}
+
+pro-out() {
+
+	(
+		echo "2"
+		echo "# Processing..."; sleep 1
+		echo "4"
+		echo "# Processing..."; sleep 1
+		echo "6"
+		echo "# Processing..."; sleep 1
+		echo "8"
+		echo "# Processing..."; sleep 1
+		echo "10"
+		echo "# Processing..."; sleep 1
+		echo "12"
+		echo "# Processing..."; sleep 1
+		echo "14"
+		echo "# Processing..."; sleep 1
+		echo "16"
+		echo "# Processing..."; sleep 1
+		echo "18"
+		echo "# Processing..."; sleep 1
+		echo "20"
+		echo "# Processing..."; sleep 1
+		echo "22"
+		echo "# Processing..."; sleep 1
+		echo "24"
+		echo "# Processing..."; sleep 1
+		echo "26"
+		echo "# Processing..."; sleep 1
+
+	) |
+	zenity --progress \
+	--title="OUTPUT ==>" \
+	--text="Showing log" \
+	--extra-button="HALT PROCESS" \
+	--ok-label="Hide" \
+	--cancel-label="Dismiss" \
+	--extra-button="Send to BG" \
+	--percentage=0 \
+	--time-remaining \
+	--pulsate \
+	--auto-close \
+	--auto-kill
+
+	(( $? !=0 )) && zenity --error --text="Error in Zenity Command"
+
+	exit 0
+
+
+}

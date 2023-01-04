@@ -1,0 +1,81 @@
+# Locals
+
+fickle=$(function)
+
+show-locals() {
+	local home_skel=(
+		$HOME/.alias
+		$HOME/.zshrc
+		$HOME/.config
+		$HOME/.local
+		$HOME/.zsh_history
+		$HOME/bin
+		$HOME/.oh-my-zsh
+		$HOME/.fonts.conf
+		$HOME/iso
+		$HOME/default_webapp
+		$HOME/Documents
+		$HOME/Downloads
+		$HOME/Music
+		$HOME/onedrive
+		$HOME/Pictures
+		$HOME/unzipped
+		$HOME/zip
+		$HOME/yt
+		$HOME/Videos
+		$HOME/duel.mlt
+		$HOME/LightlyShaders
+		$HOME/.gnupg
+		$HOME/gtkrc-2.0
+
+	)
+
+#	sudo cp -r ${home_skel} /mnt/master/.home
+
+	local main_skel=(
+		/main/functions
+		/main/scripts
+		/main/installers
+		/main/source-docs
+		/main/ftemplates
+	)
+
+#	sudo cp -r ${main_skel} /mnt/master/.main
+
+	local corbopkg=(
+		/var/lib/pacman
+	)
+
+	local var_import=(
+		${corbopkg}
+		/var/lib/systemd/rfkill
+		/var/lib/dhcpcd
+		/var/lib/iwd
+	)
+
+#	sudo cp -r ${var_import} /mnt/master/.var
+
+	local app_import=(
+		/usr/share/applications
+	)
+
+#	sudo cp -r ${app_import} /mnt/master/.applications
+
+	local zsh_plugs=(
+		/usr/share/zsh/plugins
+	)
+
+#	cp -r ${zsh_plugs} /mnt/master/.plugins
+
+	local import_files=(
+		$ZSH/oh-my-zsh.sh
+		/etc/pacman.conf
+		/etc/pacman.d/mirrorlist
+		/etc/bluetooth/main.conf
+		/etc/sudoers
+		/etc/byobu
+	)
+
+#	sudo cp -r ${etc_import} /mnt/master/.etc
+
+}

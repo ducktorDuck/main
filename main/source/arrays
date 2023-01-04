@@ -1,0 +1,18 @@
+
+pcolors=(
+	color1="$fg[red]red$reset_color"
+	color2="$fg_bold[red]orange$reset_color"
+	color3="$fg[green]green(yellowish)$reset_color"
+	color4="$fg_bold[green]bold green$reset_color"
+	color5="$fg[blue]blue$reset_color"
+	color6="$fg_bold[blue]bold blue(light cyan)$reset_color"
+	color7="$fg[cyan]cyan (dark cyan)$reset_color"
+	color8="$fg_bold[cyan]cyan (light blue)$reset_color"
+	color9="$fg[grey]darker blue$reset_color"
+	color10="$fg_bold[grey]dark blue$reset_color"
+	color10="$fg[yellow]yellow$reset_color"
+	color11="$fg_bold[yellow]bold yellow (vibe green)$reset_color"
+	color12="$fg[magenta]magenta (pink)$reset_color"
+	color13="$fg_bold[magenta]magenta$reset_color"
+)
+
