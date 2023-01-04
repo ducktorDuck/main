@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+
+systemctl enable iwd
+systemctl enable dhcpcd
+systemctl start dhcpcd
+systemctl start iwd
+systemctl enable docker
+systemctl start docker
+
+iwctl station wlan0 connect Aj1982
+wait
+
+systemctl enable sddm
+pacman -Syyu fail2ban
+
+systemctl enable fail2ban
+systemctl start fail2ban
+systemctl enable ufw
+systemctl start ufw
+ufw enable
+chown -R me:me /home
+
+systemctl start sddm

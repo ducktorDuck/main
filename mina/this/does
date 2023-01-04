@@ -1,0 +1,34 @@
+# Static Declarative core to {" 'Mina Does' what 'Mina Says' "}
+
+function 'do init mina'() {
+   for files in /main/source-docs/*; do
+      source $files
+      for more in /main/mina/*; do
+         source $more
+      done
+   done
+}
+
+'go bash as mina'() {
+   exec bash && 'do init mina'
+}
+
+'go bash as mina'
+
+ for THIS in */mina/*; do
+    source $THIS
+     foreach SHOW in $THIS; do
+        echo "Item:$SHOW"
+     done
+ done
+
+ function 'mina talk'() {
+   PARAMS="ARGV[@]"
+    whatever=$PARAMS
+       case whatever in
+          'speak words')
+            echo $whatever
+            ;;
+      esac
+
+ }

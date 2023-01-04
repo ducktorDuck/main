@@ -1,0 +1,149 @@
+# Prompt alias's compatible with BASH or ZSH
+#############################
+# Grub Installaton Alias's  #  👇 👇
+#############################
+alias grub-mkconfig='sudo grub-mkconfig'
+alias grub-install='sudo grub-install'
+
+##########################################
+# Sudo alias's for Package Installation  #   👇 👇
+##########################################
+{
+alias pac-fix=\
+   {'rm /var/lib/pacman/db.lck
+pacman -Fy'}
+}
+alias pacstrap='sudo pacstrap'
+alias pak='yes | pacman -S'
+alias pacd='pacman -Syyu'
+alias pacman='sudo pacman'
+
+########################
+# General Sudo Switch  #  👇 👇
+########################
+alias systemctl='sudo systemctl'
+alias mkdir='sudo mkdir -p'
+alias cp='sudo cp -r'
+alias mv='sudo mv'
+alias rm='sudo rm -r'
+alias chmod='sudo chmod'
+alias chown='sudo chown'
+alias mount='sudo mount'
+alias umount='sudo umount'
+alias blkid='sudo blkid'
+#alias yarn='sudo yarn'
+alias npm='sudo npm'
+alias mkfstab='sudo genfstab -U'
+alias genfstab='sudo genfstab'
+alias arch-chroot='sudo arch-chroot'
+alias rmdir='sudo rmdir'
+alias reflector='sudo reflector'
+alias refer='sudo reflector'
+alias wipfs='sudo wipefs'
+alias git='sudo git'
+alias nano='sudo nano'
+
+#################
+# File Editing  #  👇 👇
+#################
+alias theme='kate -b $theme'
+alias edit='kate -b --start Main'
+alias kate='kate -b --start Main'
+
+#####################
+# System Dictation  #  👇 👇
+#####################
+alias syste='systemctl enable'
+alias systs='systemctl start'
+alias systr='systemctl restart'
+alias systd='systemctl disable'
+
+############
+# Viewing  #  👇 👇
+############
+alias dc='cd ..'
+alias ls='sudo ls -a'
+alias ,='cd '
+
+################
+# Permissions ##  👇 👇
+################
+alias wmod='chmod -R a+w'
+alias xmod='chmod -R a+x'
+alias mine='chown -R $USER:$USER $PWD'
+alias memode='chmod -R 777 $PWD chown -R me:me $PWD'
+
+#############
+# Sourcery  #  👇 👇
+#############
+alias sa='source ~/.alias'
+alias sz='source ~/.zshrc'
+alias s='source'
+alias sf='source /main/functions'
+alias sourcery='source "$so_all" '
+alias all='source $HOME/.zshrc || source /main/source-docs/all | echo "Using backup source" '
+
+########################
+# Disc Image Writting  #  👇 👇
+########################
+alias dd='sudo dd status=progress'
+
+####################
+# FS Manipulation  #  👇 👇
+####################
+alias cfdisk='sudo cfdisk'
+alias mkfs='sudo mkfs'
+alias mkfs.vfat='sudo mkfs.vfat -F32 -I'
+alias mkfs.ext4='sudo mkfs.ext4'
+alias mkfs.ntfs='sudo mkfs.ntfs'
+alias mkext4='sudo mkfs.ext4'
+alias mkfat='sudo mkfs.vfat -F32 -I'
+
+################
+# FS clearing  #  👇 👇
+################
+alias wipe='sudo wipefs -a'
+alias wipesda='sudo wipefs -a /dev/sda'
+alias wipenvm='sudo wipefs -a /dev/nvme0n1'
+alias wipesdb='sudo wipefs -a /dev/sdb'
+alias wipesdc='sudo wipefs -a /dev/sdc'
+
+#########
+# Misc  #  👇 👇
+#########
+alias npmg='sudo npm -i -g'
+alias add-function='add-func'
+alias b='bluetoothctl'
+alias logo='loginctl kill-user $USER'
+alias set-timezone='ln -sf /usr/share/zoneinfo/America/LosAngeles /etc/localtime'
+alias interprog='interchangable-progress'
+alias corboman='bashtop'
+alias corbo='sudo pacman'
+alias corbpak='sudo pacman -S'
+alias corbolook='sudo pacman -Ss'
+alias c='$(corbolook)'
+alias get='sudo git clone'
+alias got='sudo git'
+alias corb-clone='rclone'
+alias emirrors='sudo nano $mirror'
+alias engage-corbi-shell='sudo /usr/bin/plasmashell --no-respawn'
+alias logout='sudo loginctl kill-user "$USER"'
+alias sali='source /main/source-docs/.alias'
+alias alian='sudo nano /main/source-docs/.alias'
+
+alias mina-make-better='xdg-user-dirs-update' 
+
+alias lscbin='ls -a /cbin/dev'
+alias cdcbin='cd /cbin/dev'
+alias cmdMina='composer --help'
+alias mkMina='cd $webdir || cd /main/mina/dev/web; composer create-project laravel/laravel next_Mina_project; export minasProject=next_Mina_project'
+alias MinaStrings='cd $webdir/next_Mina_project; sudo mkdir nodery; cd nodery; sudo yarn import; sudo yarn create electron-app open_me; sudo yarn add uglify; sudo yarn add lint; sudo yarn upgrade'
+
+alias cmdComplexMina='cd $webdir/$minasProject; php artisan'
+alias corbi='sudo docker'
+alias corbi-compose='sudo docker compose'
+alias corbi-composite='yad'
+alias corbi-snag='sudo docker pull'
+alias corbi-composePHP='composer'
+
+alias corbi-hides='gnome-boxes'

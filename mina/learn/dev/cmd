@@ -1,0 +1,41 @@
+# Static lst file of local dev commands for the 'Mina' Framework pairing
+
+Class: AIuP
+Type: lst
+Scriptor: Corbash
+Extension Type: '.cbsh'
+Fname: */cmd.cbsh
+
+# Remove the need to identify file by type setting, i.e. remove the dang extension from the file through sed cut
+
+for what in $that.thing; do
+	echo | ${which} 'sed s'^/#//''^/.n'
+
+	foreach (( i++ )) * (( ; ; ))||; do
+		'${cut that shit out}'
+	done
+done
+
+BEGIN $![@] 2>&1/dev/null
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\\
+
+COMMANDS FOR MINA FW WEB DEV
+
+composer:
+
+	--Highly portable and extensive all around CLI parser, installer, manager, just useful tool.
+	--Call composer by passing the command in CLI 'composer'
+
+	--To see composer help page, pass:
+		composer --help
+
+		composer create-project "$mina_project_base" "$mina_project" build a website base using PHP and whatever FW you want.  Laravel is good.
+
+corblob:
+	--Node installer, and linter.  Easy to use, extensable, efficient.
+
+	Usage:
+		corblob create "$mina_project"
+
+		That will create a new project with hundreds of modules and all thats needed to build a website using standard javascript and HTML with CSS.  Use composer for PHP

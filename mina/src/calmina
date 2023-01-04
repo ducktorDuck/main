@@ -1,0 +1,41 @@
+# Mina Specific Iterations
+
+
+# Just a simple way to source the Mina Env. without any issues if engaging while in a hight
+# intigrated environment already; as is expected when not in a CorbiContainer.
+
+function calmina() {
+
+    for f in /mina/src/*; do
+        exclude() {
+
+            mv /mina/init.mina /main/init.mina
+
+        }
+            # It is probobly easier to just move this file out, source the rest of the dir, then
+            # move this file back in. We could leave this file out, but it is a src file so i'd leave
+            # it where it should..
+        include() {
+
+            mv /main/init.mina /mina/init.mina
+
+        }
+
+        exclude; wait
+
+        source $f; wait
+
+        include
+            for swat in $f; do
+                unset f
+
+            done
+        unset swat
+
+    done
+
+    # Now introduce core parts of CCALVVIN or calvin or just ccapi which is what it actually is..
+
+
+
+}

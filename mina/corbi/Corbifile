@@ -1,0 +1,6 @@
+# CorbiFile to dockerize ubuntu
+
+restart:
+  unless-stopped
+is_persistent
+  unless-stopped

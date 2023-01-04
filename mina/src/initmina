@@ -1,0 +1,40 @@
+export mina="/mina"
+export scmina="mina/scripts"
+export fmina="/mina/functions"
+export smina="/mina/src"
+export webdir="mina/dev/web"
+export pdir="/mina/dev/web/next@mina"
+
+alias cdmina='cd $mina'
+alias cdscmina='cd $scmina'
+alias cdfmina='cd $fmina'
+alias cdsmina='cd $smina'
+alias cdweb='cd $webdir'
+alias cdpdir='cd $pdir'
+
+alias corbi='sudo docker'
+alias docker='sudo docker'
+alias mina-composer='composer'
+alias corb-compose='sudo docker-compose'
+alias corbictl=
+
+
+function \
+\
+
+    source $scmina/corbi-container-ctrl && \
+    'run corbi container control interface'
+        if [[ $? -lt 1 ]]; then
+            alias mina-mkcorbifw='$(
+
+                sudo mkdir Framework && \
+                sudo chmod -R +wx Framework && \
+                sudo chown -R "$USER":me Framework \
+                ; cd Framework \
+                ; composer create-project laravel/laravel Backend && \
+                sudo chmod -R +wx Backend && \
+                sudo chown -R "$USER":me Backend \
+                ; cd Backend \
+                ; composer update
+
+                )'
